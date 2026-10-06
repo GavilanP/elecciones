@@ -46,7 +46,7 @@ SALIDA = SEGUIMIENTO / "votaciones" / "congreso"
 
 CONGRESO = "https://www.congreso.es"
 VOTACIONES_URL = CONGRESO + "/es/opendata/votaciones"
-USER_AGENT = "elecciones/1.0 (comparador ciudadano; https://github.com/gavilanp/elecciones)"
+USER_AGENT = "elecciones/1.0 (comparador ciudadano de datos abiertos del Congreso)"
 
 DIAS_RE = re.compile(r"diasVotaciones\s*=\s*\[([^\]]*)\]")
 JSON_RE = re.compile(r"/webpublica/opendata/votaciones/Leg(\d+)/Sesion(\d+)/(\d{8})/Votacion(\d+)/[^\"'\s]+?\.json")
@@ -61,7 +61,12 @@ def descargar(url, reintentos=5, espera=60):
     ultimo = None
     for intento in range(reintentos):
         try:
-            peticion = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept-Encoding": "gzip"})
+            peticion = urllib.request.Request(url, headers={
+                "User-Agent": USER_AGENT,
+                "Accept": "*/*",
+                "Accept-Language": "es-ES,es;q=0.9",
+                "Accept-Encoding": "gzip",
+            })
             with urllib.request.urlopen(peticion, timeout=espera) as r:
                 datos = r.read()
                 return gzip.decompress(datos) if r.headers.get("Content-Encoding") == "gzip" else datos
