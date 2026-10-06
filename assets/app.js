@@ -8,10 +8,10 @@ const BASE = DEMO ? 'datos/ejemplo/' : 'datos/';
 const ESCRITORIO = window.matchMedia('(min-width: 48rem)');
 
 const POSTURAS = {
-  a_favor: { texto: 'A favor', simbolo: '✓', clase: 'favor' },
-  en_contra: { texto: 'En contra', simbolo: '✗', clase: 'contra' },
-  matizada: { texto: 'Matizada', simbolo: '≈', clase: 'matiz' },
-  no_se_pronuncia: { texto: 'No se pronuncia', simbolo: '—', clase: 'nada' },
+  a_favor: { texto: 'A favor', simbolo: '✓', clase: 'dice-favor' },
+  en_contra: { texto: 'En contra', simbolo: '✗', clase: 'dice-contra' },
+  matizada: { texto: 'Matizada', simbolo: '≈', clase: 'dice-matiz' },
+  no_se_pronuncia: { texto: 'No se pronuncia', simbolo: '—', clase: 'dice-nada' },
 };
 const PENDIENTE = { texto: 'Pendiente de revisar', simbolo: '·', clase: 'pendiente' };
 

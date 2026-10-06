@@ -403,6 +403,12 @@ p { margin: 0; }
 .insignia.contra { color: var(--contra); background: var(--contra-fondo); }
 .insignia.matiz { color: var(--matiz); background: var(--matiz-fondo); }
 .insignia.nada { color: var(--nada); background: var(--nada-fondo); }
+/* Lo que dicen (posturas): solo tinta, se distinguen por forma y símbolo.
+   El verde y el rojo se reservan para lo que han hecho (votos y si coincide). */
+.insignia.dice-favor { color: var(--hoja); background: var(--tinta); }
+.insignia.dice-contra { color: var(--tinta); background: var(--hoja); box-shadow: inset 0 0 0 1.5px var(--tinta); }
+.insignia.dice-matiz { color: var(--tinta); background: var(--hoja); border: 1.5px dashed var(--tinta); padding: calc(.15rem - 1.5px) calc(.6rem - 1.5px); }
+.insignia.dice-nada { color: var(--tinta-2); background: var(--hoja-2); }
 .insignia.pendiente { color: var(--tinta-2); background: transparent; box-shadow: inset 0 0 0 1px var(--linea); font-weight: 400; }
 .matriz .insignia { min-width: 2rem; justify-content: center; }
 
