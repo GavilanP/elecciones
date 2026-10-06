@@ -1,0 +1,9 @@
+Tipografías incluidas (alojadas aquí para no depender de servicios externos):
+
+- Archivo — Omnibus-Type. SIL Open Font License 1.1.
+  https://github.com/Omnibus-Type/Archivo
+- Atkinson Hyperlegible Next — Braille Institute of America. SIL Open Font License 1.1.
+  https://www.brailleinstitute.org/freefont/
+
+Texto de la licencia: https://openfontlicense.org/open-font-license-official-text/
+Subconjunto «latin» descargado de Google Fonts.

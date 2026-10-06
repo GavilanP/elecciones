@@ -2,20 +2,34 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Elecciones: qué propone cada partido</title>
-  <meta name="description" content="Comparador neutral de lo que proponen los partidos para las elecciones generales y de lo que votaron en el Congreso. Cada dato con su fuente.">
-  <meta property="og:title" content="Elecciones: qué propone cada partido">
-  <meta property="og:description" content="Qué propone cada partido, tema a tema, y si coincide con lo que votó. Cada dato con su fuente.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>¿Qué propone cada partido?</title>
+  <meta name="description" content="Compara, tema a tema, qué propone cada partido en las elecciones generales y si coincide con lo que votó en el Congreso. Cada dato con su fuente.">
   <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='12' width='22' height='16' rx='2' fill='%23555'/%3E%3Crect x='12' y='4' width='8' height='12' fill='%23ddd' stroke='%23555' stroke-width='2'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181b1f" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="¿Qué propone cada partido?">
+  <meta property="og:title" content="¿Qué propone cada partido?">
+  <meta property="og:description" content="Compara, tema a tema, qué propone cada partido en las elecciones generales y si coincide con lo que votó en el Congreso. Cada dato con su fuente.">
+  <meta property="og:image" content="https://gavilanp.github.io/elecciones/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="¿Qué propone cada partido? Comparador de programas electorales con fuentes.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/iconos/icono.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/iconos/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="preload" href="assets/fuentes/archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fuentes/atkinson.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/estilos.css">
   <script type="module" src="assets/app.js"></script>
 </head>
 <body data-pagina="portada">
-  <header class="cabecera">
-    <div class="contenedor">
-      <a class="marca" href="index.html" data-interno>Elecciones · qué propone cada partido</a>
+  <header class="barra">
+    <div class="barra-interior">
+      <a class="marca" href="index.html" data-interno><svg class="marca-icono" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="3" fill="var(--hoja)" stroke="currentColor" stroke-width="2.5"/><path d="M10 10l12 12M22 10L10 22" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg><span>¿Qué propone cada partido?</span></a>
       <nav class="nav" aria-label="Principal">
         <a href="index.html" data-interno aria-current="page">Temas</a>
         <a href="metodologia.html" data-interno>Metodología</a>
@@ -24,23 +38,52 @@
     </div>
   </header>
 
-  <main class="contenedor">
-    <h1>¿Qué propone cada partido?</h1>
-    <p class="entradilla">Un comparador de las propuestas de los partidos para las elecciones generales, tema a tema, y de si lo que dicen coincide con lo que votaron en el Congreso.</p>
-    <ul class="principios">
-      <li><strong>Cada dato con su fuente</strong>Enlace al programa electoral (con página), a la votación oficial o a la declaración.</li>
-      <li><strong>Mismas preguntas para todos</strong>Si un partido no dice nada sobre un tema, aparece «no se pronuncia».</li>
-      <li><strong>Sin recomendaciones</strong>Aquí no se dice a quién votar ni se publican encuestas. Esa decisión es tuya.</li>
-    </ul>
-    <div id="contenido"><p class="cargando">Cargando…</p></div>
-  </main>
+  <div class="marco">
+    <aside class="lateral" aria-label="Temas">
+      <span class="antetitulo">Temas</span>
+      <div id="lateral-temas"></div>
+      <div class="lateral-pie">
+        <a href="metodologia.html" data-interno>Cómo se hace</a>
+        <a href="https://github.com/gavilanp/elecciones/issues">Avisar de un error</a>
+      </div>
+    </aside>
+
+    <main class="principal">
+      <header class="portada-cabecera">
+        <p class="estado" id="estado" hidden></p>
+        <h1>¿Qué propone <span class="marcado">cada partido</span>?</h1>
+        <p class="entradilla">Las propuestas de los partidos para las elecciones generales, tema a tema, y si lo que dicen coincide con lo que votaron en el Congreso.</p>
+      </header>
+      <ul class="principios">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1"/></svg><span><strong>Cada dato, con su fuente</strong>Programa electoral con su página, votación oficial o declaración con fecha.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="16" rx="1.5"/></svg><span><strong>Las mismas preguntas para todos</strong>Si un partido no dice nada sobre algo, aparece como «no se pronuncia».</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16v9H4z"/><path d="M9 11V4h6v7"/><path d="M8 15h8"/></svg><span><strong>Sin recomendaciones de voto</strong>Ni encuestas ni consejos: la decisión es tuya.</span></li>
+      </ul>
+      <div id="contenido"><p class="cargando">Cargando…</p></div>
+    </main>
+  </div>
 
   <footer class="pie">
-    <div class="contenedor">
+    <div class="pie-interior">
       <p>Proyecto ciudadano e independiente, sin afiliación a ningún partido. No recomienda el voto.</p>
       <p id="actualizado"></p>
       <p>¿Has visto un error? <a href="https://github.com/gavilanp/elecciones/issues">Avísalo en GitHub</a> indicando la fuente.</p>
     </div>
   </footer>
+
+  <nav class="tabbar" aria-label="Navegación">
+    <a href="index.html" data-interno aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
+    <button type="button" data-accion="temas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/></svg>Temas</button>
+    <a href="metodologia.html" data-interno><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/><path d="M8 8h8M8 12h5"/></svg>Método</a>
+    <button type="button" data-accion="compartir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Compartir</button>
+  </nav>
+
+  <dialog class="dialogo" id="dialogo-temas" aria-labelledby="dialogo-temas-titulo">
+    <div class="dialogo-cabecera">
+      <h2 id="dialogo-temas-titulo" class="antetitulo">Temas</h2>
+      <button type="button" class="boton-cerrar">Cerrar</button>
+    </div>
+    <div id="dialogo-temas-lista"></div>
+  </dialog>
 </body>
 </html>

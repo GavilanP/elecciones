@@ -1,0 +1,16 @@
+{
+  "name": "¿Qué propone cada partido?",
+  "short_name": "¿Qué proponen?",
+  "description": "Compara, tema a tema, qué propone cada partido en las elecciones generales y si coincide con lo que votó. Cada dato con su fuente.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f3f5",
+  "theme_color": "#ffffff",
+  "icons": [
+    { "src": "assets/iconos/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/iconos/icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/iconos/icono-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

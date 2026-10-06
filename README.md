@@ -11,8 +11,10 @@ La metodología completa está en [`metodologia.html`](metodologia.html).
 ## Cómo está organizado
 
 ```
-index.html, tema.html, metodologia.html   páginas de la web
-assets/                                   estilos y JavaScript (sin dependencias externas)
+index.html, tema.html, metodologia.html   páginas de la web (se adaptan a ordenador y móvil)
+assets/                                   estilos, JavaScript, tipografías e iconos (todo alojado aquí)
+assets/og.png                             imagen de vista previa al compartir en WhatsApp o redes
+manifest.webmanifest                      permite «añadir a la pantalla de inicio» en el móvil
 datos/
   meta.yml                                fecha de la votación y de la última revisión
   partidos.yml                            partidos incluidos
@@ -107,3 +109,6 @@ También se pueden editar los ficheros directamente desde la web de GitHub (icon
 - Código: [MIT](LICENSE).
 - Contenidos (`datos/` y textos de la web): [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es). Puedes reutilizarlos citando la fuente y con la misma licencia.
 - [js-yaml](https://github.com/nodeca/js-yaml) (incluido en `assets/vendor/`): MIT.
+- Tipografías Archivo y Atkinson Hyperlegible Next (en `assets/fuentes/`): SIL Open Font License 1.1.
+
+La web no carga nada de servidores externos: ni tipografías, ni analítica, ni cookies.
