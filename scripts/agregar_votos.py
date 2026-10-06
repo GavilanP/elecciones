@@ -49,22 +49,45 @@ def cargar_grupos(dir_datos):
     return tabla
 
 
+SIN_GRUPO = "?"  # así vienen los diputados que votan antes de tener grupo asignado
+
+
+def partido_en_fecha(valor, fecha):
+    """`valor` es un id de partido, «ninguno» o una lista de {partido, desde, hasta}."""
+    if isinstance(valor, str):
+        return valor
+    for tramo in valor or []:
+        if str(tramo.get("desde") or "0000") <= fecha <= str(tramo.get("hasta") or "9999"):
+            return tramo["partido"]
+    return None
+
+
 def agregar_fichero(ruta, ambito, grupos, sin_asignar):
     datos = json.loads(ruta.read_text("utf-8"))
     leg = datos["legislatura"]
     diputados, codigos = datos["diputados"], datos["grupos"]
 
-    def partidos_de(i, codigo):
+    # Grupo «?»: se toma el grupo en el que ese diputado aparece el resto de la legislatura
+    # (solo si es uno; si no, queda sin asignar).
+    otros_grupos = defaultdict(set)
+    for v in datos["votaciones"]:
+        for i, g in enumerate(v.get("grupos", "")):
+            if g != "." and codigos[BASE36.index(g)] != SIN_GRUPO:
+                otros_grupos[i].add(codigos[BASE36.index(g)])
+
+    def partidos_de(i, codigo, fecha):
+        if codigo == SIN_GRUPO and len(otros_grupos[i]) == 1:
+            codigo = next(iter(otros_grupos[i]))
         g = grupos.get((ambito, leg, codigo))
         if g is None:
-            sin_asignar[(ambito, leg, codigo)].add(None)
+            sin_asignar[(ambito, leg, codigo)].add(None if codigo != SIN_GRUPO else diputados[i])
             return []
         if g.get("diputados") is not None:
-            partido = g["diputados"].get(diputados[i])
+            partido = partido_en_fecha(g["diputados"].get(diputados[i]), fecha)
             if partido is None:
                 sin_asignar[(ambito, leg, codigo)].add(diputados[i])
                 return []
-            return [partido]
+            return [] if partido == "ninguno" else [partido]
         return g.get("partidos") or []
 
     for v in datos["votaciones"]:
@@ -72,7 +95,7 @@ def agregar_fichero(ruta, ambito, grupos, sin_asignar):
         for i, (voto, g) in enumerate(zip(v.get("votos", ""), v.get("grupos", ""))):
             if voto == ".":
                 continue
-            for partido in partidos_de(i, codigos[BASE36.index(g)]):
+            for partido in partidos_de(i, codigos[BASE36.index(g)], v["fecha"]):
                 cuentas[partido][CLAVE[voto]] += 1
         v["por_partido"] = {p: {"voto": voto_de_partido(c), **dict(c)} for p, c in sorted(cuentas.items())}
 
@@ -95,10 +118,11 @@ def main():
     if sin_asignar:
         print("\nPendiente de asignar en grupos.yml:")
         for (ambito, leg, codigo), nombres in sorted(sin_asignar.items()):
+            nombres_reales = sorted(n for n in nombres if n)
             if None in nombres:
                 print(f"  - {ambito} {leg}: grupo «{codigo}» sin entrada")
             else:
-                print(f"  - {ambito} {leg}: grupo «{codigo}», diputados sin partido: {'; '.join(sorted(nombres))}")
+                print(f"  - {ambito} {leg}: grupo «{codigo}», diputados sin partido: {'; '.join(nombres_reales)}")
     sys.exit(0)
 
 

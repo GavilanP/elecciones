@@ -19,8 +19,21 @@
 #     "Apellidos, Nombre": partido-id
 
 # Los grupos con varios partidos (Mixto y, en la XIV, Plural) se reparten diputado a
-# diputado. Sus listas se rellenan con lo que muestra `python3 scripts/agregar_votos.py`
-# tras la primera descarga (nombres tal y como vienen en los datos oficiales).
+# diputado, con el nombre tal y como viene en los datos oficiales. El valor puede ser:
+#   - el id de un partido;
+#   - «ninguno»: diputado sin partido (expulsado, no adscrito…); su voto no se atribuye;
+#   - una lista de tramos con fechas: [{ partido: upn, hasta: 2022-02-14 }, { partido: ninguno, desde: 2022-02-15 }]
+# `python3 scripts/agregar_votos.py` lista los diputados que faltan.
+#
+# Grupo «?»: así vienen los diputados que votan antes de tener grupo. Se les asigna solo el
+# grupo en el que aparecen el resto de la legislatura; si estuvieron en varios, hay que
+# añadir una entrada `grupo: "?"` con `diputados`.
+#
+# PENDIENTE DE VERIFICAR (no se asigna hasta tener fuente):
+#   - XIV GMx: Sayas López y García Adanero (Navarra Suma → expulsados de UPN en 2022: falta la fecha).
+#   - XIV GMx: Pita Cárdenes (procedía del grupo de Unidas Podemos).
+#   - XIV GPlu: Bel Accensi, Cañadell Salvia, Miquel i Valentí, Boadella Esteve
+#     (elegidos en JxCat; fecha de su paso a PDeCAT por confirmar).
 
 # ── Congreso, XII legislatura (seguida desde el 2 de junio de 2018) ─────────────
 - { ambito: congreso, legislatura: XII, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
@@ -29,7 +42,30 @@
 - { ambito: congreso, legislatura: XII, grupo: GCs, nombre: Grupo Ciudadanos, partidos: [cs] }
 - { ambito: congreso, legislatura: XII, grupo: GER, nombre: Grupo de Esquerra Republicana, partidos: [erc] }
 - { ambito: congreso, legislatura: XII, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
-- { ambito: congreso, legislatura: XII, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+- ambito: congreso
+  legislatura: XII
+  grupo: GMx
+  nombre: Grupo Mixto
+  diputados:
+    "Alli Martínez, Íñigo Jesús": upn
+    "Salvador Armendáriz, Carlos Casimiro": upn
+    "Baldoví Roda, Joan": compromis
+    "Bataller i Ruiz, Enric": compromis
+    "Candela Serna, Ignasi": compromis
+    "Sorlí Fresquet, Marta": compromis
+    "Bel Accensi, Ferran": pdecat
+    "Campuzano i Canadés, Carles": pdecat
+    "Ciuró i Buldó, Lourdes": pdecat
+    "Guillaumes i Ràfols, Feliu-Joan": pdecat
+    "Miquel i Valentí, Sergi": pdecat
+    "Nogueras i Camero, Míriam": pdecat
+    "Postius Terrado, Antoni": pdecat
+    "Xuclà i Costa, Jordi": pdecat
+    "Martínez Oblanca, Isidro Manuel": foro
+    "Oramas González-Moro, Ana María": cc
+    "Quevedo Iturbe, Pedro": nc
+    "Matute García de Jalón, Oskar": bildu
+    "Beitialarrangoitia Lizarralde, Marian": bildu
 
 # ── Congreso, XIII legislatura ──────────────────────────────────────────────────
 - { ambito: congreso, legislatura: XIII, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
@@ -39,7 +75,29 @@
 - { ambito: congreso, legislatura: XIII, grupo: GVOX, nombre: Grupo VOX, partidos: [vox] }
 - { ambito: congreso, legislatura: XIII, grupo: GR, nombre: Grupo Republicano, partidos: [erc] }
 - { ambito: congreso, legislatura: XIII, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
-- { ambito: congreso, legislatura: XIII, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+- ambito: congreso
+  legislatura: XIII
+  grupo: GMx
+  nombre: Grupo Mixto
+  diputados:
+    "Aizpurua Arzallus, Mertxe": bildu
+    "Iñarritu García, Jon": bildu
+    "Matute García de Jalón, Oskar": bildu
+    "Ruiz de Pinedo Undiano, Iñaki": bildu
+    "Alonso-Cuevillas i Sayrol, Jaume": junts
+    "Borràs Castanyer, Laura": junts
+    "Miquel i Valentí, Sergi": junts
+    "Nogueras i Camero, Míriam": junts
+    "Rull Andreu, Josep": junts
+    "Sánchez Picanyol, Jordi": junts
+    "Turull Negre, Jordi": junts
+    "Junqueras Vies, Oriol": erc
+    "Baldoví Roda, Joan": compromis
+    "García Adanero, Carlos": navarra-suma
+    "Sayas López, Sergio": navarra-suma
+    "González Taño, María Guadalupe": cc
+    "Oramas González-Moro, Ana María": cc
+    "Mazón Ramos, José María": prc
 
 # ── Congreso, XIV legislatura ───────────────────────────────────────────────────
 - { ambito: congreso, legislatura: XIV, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
@@ -50,8 +108,36 @@
 - { ambito: congreso, legislatura: XIV, grupo: GCs, nombre: Grupo Ciudadanos, partidos: [cs] }
 - { ambito: congreso, legislatura: XIV, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
 - { ambito: congreso, legislatura: XIV, grupo: GEH Bildu, nombre: Grupo Euskal Herria Bildu, partidos: [bildu] }
-- { ambito: congreso, legislatura: XIV, grupo: GPlu, nombre: Grupo Plural, diputados: {} }
-- { ambito: congreso, legislatura: XIV, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+- ambito: congreso
+  legislatura: XIV
+  grupo: GPlu
+  nombre: Grupo Plural
+  diputados:
+    "Alonso-Cuevillas i Sayrol, Jaume": junts
+    "Borràs Castanyer, Laura": junts
+    "Calvo Gómez, Pilar": junts
+    "Illamola Dausà, Mariona": junts
+    "Nogueras i Camero, Míriam": junts
+    "Pagès i Massó, Josep": junts
+    "Baldoví Roda, Joan": compromis
+    "Picó Garcés, Maria Josep": compromis
+    "Errejón Galván, Íñigo": mas-pais
+    "Sabanés Nadal, Inés": mas-pais
+    "Rego Candamil, Néstor": bng
+- ambito: congreso
+  legislatura: XIV
+  grupo: GMx
+  nombre: Grupo Mixto
+  diputados:
+    "Botran Pahissa, Albert": cup
+    "Vehí Cantenys, Mireia": cup
+    "Guitarte Gimeno, Tomás": teruel-existe
+    "Martínez Oblanca, Isidro Manuel": foro
+    "Mazón Ramos, José María": prc
+    "Oramas González-Moro, Ana María": cc
+    "Quevedo Iturbe, Pedro": nc
+    "Fernández Pérez, María": nc
+    "Cambronero Piqueras, Pablo": ninguno   # deja Cs y pasa al Mixto en marzo de 2021
 
 # ── Congreso, XV legislatura ────────────────────────────────────────────────────
 - { ambito: congreso, legislatura: XV, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
@@ -62,4 +148,25 @@
 - { ambito: congreso, legislatura: XV, grupo: GJxCAT, nombre: Grupo Junts per Catalunya, partidos: [junts] }
 - { ambito: congreso, legislatura: XV, grupo: GEH Bildu, nombre: Grupo Euskal Herria Bildu, partidos: [bildu] }
 - { ambito: congreso, legislatura: XV, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
-- { ambito: congreso, legislatura: XV, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+- ambito: congreso
+  legislatura: XV
+  grupo: GMx
+  nombre: Grupo Mixto
+  diputados:
+    "Belarra Urteaga, Ione": podemos
+    "Santana Perera, Noemí": podemos
+    "Sánchez Serna, Javier": podemos
+    "Velarde Gómez, Martina": podemos
+    "Verstrynge Revuelta, Lilith": podemos
+    "Rego Candamil, Néstor": bng
+    "Valido García, Cristina": cc
+    "Catalán Higueras, Alberto": upn
+    "Micó Micó, Àgueda": compromis
+    "Ábalos Meco, José Luis": ninguno            # sale del Grupo Socialista en febrero de 2024
+    "Ortega Smith-Molina, Francisco Javier": ninguno   # sale del Grupo VOX en julio de 2026
+- ambito: congreso
+  legislatura: XV
+  grupo: "?"
+  nombre: Sin grupo en la votación
+  diputados:
+    "Santana Perera, Noemí": podemos   # un día sin grupo entre dos periodos en el Mixto

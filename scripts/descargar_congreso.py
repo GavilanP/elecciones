@@ -104,18 +104,26 @@ def urls_del_dia(romano, fecha):
     return [urls[k] for k in sorted(urls)]
 
 
-def tipo_de_votacion(texto):
-    """Clasificación orientativa a partir del título oficial (sin IA)."""
-    t = texto.lower()
-    if "toma en consideración" in t:
-        return "toma_en_consideracion"
+def tipo_de_votacion(titulo, expediente="", subgrupo=""):
+    """Clasificación orientativa a partir del texto oficial (sin IA).
+
+    `titulo` es el punto del orden del día («Dictámenes de Comisiones…»), `subgrupo` lo que
+    se vota dentro de él («Votación de conjunto», «Enmiendas presentadas por…»).
+    """
+    t, e, sub = titulo.lower(), expediente.lower(), subgrupo.lower()
     if "convalidación" in t or "convalidacion" in t:
         return "convalidacion"
-    if "totalidad" in t:
+    if "toma en consideración" in t:
+        return "toma_en_consideracion"
+    if "totalidad" in t or "totalidad" in sub:
         return "enmienda_totalidad"
-    if "votación de conjunto" in t or "votación final" in t or "votacion de conjunto" in t:
+    if "votación de conjunto" in sub or "votacion de conjunto" in sub:
         return "votacion_final"
-    if "moción" in t or "proposición no de ley" in t or "mocion" in t:
+    if "enmiendas del senado" in t or sub.startswith(("enmienda", "votación separada de las enmiendas", "correcciones técnicas")):
+        return "enmiendas"
+    if "dictamen" in sub or (t.startswith("dictámenes") and not sub):
+        return "dictamen"
+    if "proposiciones no de ley" in t or "moción" in t or "mociones" in t or "proposición no de ley" in e:
         return "mocion"
     return "otra"
 
@@ -187,7 +195,7 @@ class Legislatura:
             "titulo": titulo or expediente or f"Votación {numero} de la sesión {sesion}",
             "expediente": expediente,
             "subgrupo": subgrupo,
-            "tipo": tipo_de_votacion(" ".join([titulo, expediente, subgrupo])),
+            "tipo": tipo_de_votacion(titulo, expediente, subgrupo),
             "url_oficial": url,
             "asentimiento": str(tot.get("asentimiento", "")).strip().lower().startswith("s"),
             "totales": {
@@ -270,7 +278,17 @@ def main():
     p.add_argument("legislaturas", nargs="*", help="p. ej. XIV XV (por defecto, todas las de elecciones.yml)")
     p.add_argument("--rehacer", action="store_true", help="descarga de nuevo la legislatura entera")
     p.add_argument("--hilos", type=int, default=4, help="descargas simultáneas (no abusar de la web oficial)")
+    p.add_argument("--reclasificar", action="store_true", help="solo recalcula `tipo` en lo ya descargado (sin conexión)")
     args = p.parse_args()
+
+    if args.reclasificar:
+        for ruta in sorted(SALIDA.glob("*.json")):
+            datos = json.loads(ruta.read_text("utf-8"))
+            for v in datos["votaciones"]:
+                v["tipo"] = tipo_de_votacion(v["titulo"], v.get("expediente", ""), v.get("subgrupo", ""))
+            ruta.write_text(json.dumps(datos, ensure_ascii=False, separators=(",", ":")) + "\n", "utf-8")
+            print(f"{ruta.name}: tipos recalculados")
+        return
 
     seguidas = legislaturas_seguidas()
     if args.legislaturas:

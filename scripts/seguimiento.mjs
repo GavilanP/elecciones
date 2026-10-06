@@ -21,7 +21,7 @@ const ESTADOS_RELACION = ['sugerida_ia', 'confirmada', 'descartada'];
 const VOTO_COMPACTO = { S: 'si', N: 'no', A: 'abstencion', X: 'no_vota' };
 const BASE36 = '0123456789abcdefghijklmnopqrstuvwxyz';
 const VOTO_PARTIDO = ['si', 'no', 'abstencion', 'dividido', 'no_presente'];
-const TIPOS_VOTACION = ['votacion_final', 'toma_en_consideracion', 'enmienda_totalidad', 'convalidacion', 'mocion', 'otra'];
+const TIPOS_VOTACION = ['votacion_final', 'dictamen', 'enmiendas', 'toma_en_consideracion', 'enmienda_totalidad', 'convalidacion', 'mocion', 'otra'];
 const TIPOS_EVIDENCIA = ['votacion', 'iniciativa', 'norma'];
 const SENTIDOS = ['a_favor', 'en_contra', 'neutro'];
 const VALORACIONES = ['coherente', 'contradictoria', 'mixta', 'sin_actuacion', 'fuera_de_su_alcance'];
@@ -159,19 +159,39 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
     const porDiputado = g.diputados && typeof g.diputados === 'object';
     if (porPartido === Boolean(porDiputado)) error(donde, 'indica `partidos` o `diputados` (uno de los dos)');
     lista(g.partidos).forEach((id) => partidoConocido(donde, id));
-    Object.values(g.diputados ?? {}).forEach((id) => partidoConocido(donde, id));
+    for (const [nombre, valor] of Object.entries(g.diputados ?? {})) {
+      const tramos = typeof valor === 'string' ? [{ partido: valor }] : lista(valor);
+      if (!tramos.length) error(donde, `${nombre}: indica un partido, «ninguno» o una lista de tramos con fechas`);
+      for (const t of tramos) {
+        if (t?.partido !== 'ninguno') partidoConocido(`${donde} › ${nombre}`, t?.partido);
+        for (const f of ['desde', 'hasta']) if (t?.[f] != null && !fechaValida(t[f])) error(`${donde} › ${nombre}`, `${f} debe ser AAAA-MM-DD`);
+      }
+    }
     if (lista(g.partidos).length > 1) aviso(donde, 'grupo con varios partidos: sus votos se atribuyen a todos ellos; mejor repartir por `diputados`');
     grupos.set(clave, g);
   }
   // Lo que falta en grupos.yml se avisa una sola vez por grupo, no en cada votación.
   const gruposSinEntrada = new Set();
   const diputadosSinPartido = new Map(); // "ambito leg: grupo" → nombres
-  const partidosDeDiputado = (ambito, leg, grupo, nombre) => {
+  const SIN_GRUPO = '?'; // diputados que votan antes de tener grupo asignado
+  const partidoEnFecha = (valor, fecha) => {
+    if (typeof valor === 'string') return valor;
+    const t = lista(valor).find((x) => fecha >= (x.desde ?? '0000') && fecha <= (x.hasta ?? '9999'));
+    return t?.partido;
+  };
+  // `otrosGrupos`: índice de diputado → grupos (sin «?») en los que aparece en la legislatura.
+  const partidosDeDiputado = (ambito, leg, grupo, nombre, fecha, otrosGrupos) => {
+    if (grupo === SIN_GRUPO && otrosGrupos?.size === 1) grupo = [...otrosGrupos][0];
     const g = grupos.get(`${ambito}/${leg}/${grupo}`);
     const clave = `${ambito} ${leg}: grupo «${grupo}»`;
-    if (!g) { gruposSinEntrada.add(clave); return []; }
+    if (!g) {
+      if (grupo === SIN_GRUPO) diputadosSinPartido.set(clave, (diputadosSinPartido.get(clave) ?? new Set()).add(nombre));
+      else gruposSinEntrada.add(clave);
+      return [];
+    }
     if (!g.diputados) return g.partidos;
-    if (g.diputados[nombre]) return [g.diputados[nombre]];
+    const partido = partidoEnFecha(g.diputados[nombre], fecha);
+    if (partido) return partido === 'ninguno' ? [] : [partido];
     diputadosSinPartido.set(clave, (diputadosSinPartido.get(clave) ?? new Set()).add(nombre));
     return [];
   };
@@ -188,6 +208,16 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
       if (!l) { error(ruta, `ámbito o legislatura desconocidos (${ambito}/${leg})`); continue; }
       if (datos.ambito !== ambito || datos.legislatura !== leg) error(ruta, 'ambito/legislatura no coinciden con la ruta del fichero');
       if (!URL_OK.test(datos.fuente ?? '')) error(ruta, 'fuente debe ser un enlace http(s)');
+      const otrosGrupos = new Map();
+      for (const v of lista(datos.votaciones)) {
+        [...(v?.grupos ?? '')].forEach((g, i) => {
+          const codigo = datos.grupos?.[BASE36.indexOf(g)];
+          if (g === '.' || codigo == null || codigo === SIN_GRUPO) return;
+          if (!otrosGrupos.has(i)) otrosGrupos.set(i, new Set());
+          otrosGrupos.get(i).add(codigo);
+        });
+      }
+      let sinListaNominal = 0;
       for (const [i, v] of lista(datos.votaciones).entries()) {
         const donde = `${ruta} › ${v?.id ?? i}`;
         const clave = `${ambito}/${leg}/${v?.id}`;
@@ -202,6 +232,7 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
         // Recuentos y voto por partido recalculados desde el voto de cada diputado.
         if (v.asentimiento) continue;
         const votos = v.votos ?? '';
+        if (!votos && Object.values(v.totales ?? {}).some((n) => n > 0)) { sinListaNominal++; continue; }
         const gruposVot = v.grupos ?? '';
         if (typeof votos !== 'string' || typeof gruposVot !== 'string' || votos.length !== gruposVot.length) {
           error(donde, '`votos` y `grupos` deben ser textos de la misma longitud'); continue;
@@ -215,7 +246,7 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
           const nombre = datos.diputados?.[i];
           if (!voto || grupo == null || nombre == null) { error(donde, `posición ${i}: voto, grupo o diputado inválidos`); continue; }
           cuenta[voto]++;
-          for (const id of partidosDeDiputado(ambito, leg, grupo, nombre)) {
+          for (const id of partidosDeDiputado(ambito, leg, grupo, nombre, v.fecha, otrosGrupos.get(i))) {
             if (!porPartido.has(id)) porPartido.set(id, { si: 0, no: 0, abstencion: 0, no_vota: 0 });
             porPartido.get(id)[voto]++;
           }
@@ -237,6 +268,7 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
           if (!porPartido.has(id)) error(donde, `por_partido.${id}: ningún diputado de ese partido en la votación`);
         }
       }
+      if (sinListaNominal) aviso(ruta, `${sinListaNominal} votación(es) con totales oficiales pero sin voto nominal publicado: no se atribuyen a partidos`);
     }
   }
   for (const clave of gruposSinEntrada) aviso(`${dir}/grupos.yml`, `${clave} sin entrada: sus votos no cuentan para ningún partido`);

@@ -71,6 +71,10 @@ Para cada votación de pleno se guarda:
 - **Voto agregado por partido**, calculado con `grupos.yml`: sí, no, abstención y no votó. Se marca `dividido` si el partido no votó en bloque.
 
 > **Implementado (fase 2):** `scripts/descargar_congreso.py` + `scripts/agregar_votos.py`. Formato compacto: lista de `diputados` y de códigos de `grupos` por legislatura, y en cada votación un carácter por diputado (`S` sí, `N` no, `A` abstención, `X` no vota, `.` no figura). `por_partido` guarda los recuentos y el voto, que es la opción con al menos 2/3 de los votos emitidos o, si ninguna llega, `dividido`. No se guarda «aprobada/rechazada», porque depende de la mayoría exigida en cada caso: se muestran los recuentos oficiales.
+>
+> **Primera descarga (6 de octubre de 2026):** XII desde junio de 2018: 474 votaciones; XIII: 15; XIV: 6.583; XV hasta el 30 de septiembre de 2026: 2.175. Las cifras de la XIII, la XIV y la XV coinciden con las de Escrutinio. `tipo` se deduce del texto oficial: enmiendas (5.692), mociones y PNL (1.682), convalidaciones (338), tomas en consideración (300), dictámenes (255), enmiendas a la totalidad (182), votaciones de conjunto (58) y otras (740). Una votación de dictamen aprueba el texto en el Congreso, pero no es la votación final si después vuelve del Senado.
+> **Grupo «?»**: diputados que votan antes de tener grupo; se les asigna el único grupo en el que aparecen el resto de la legislatura.
+> **Diputados sin partido** (Ábalos, Ortega Smith…): `ninguno` en grupos.yml; su voto no se atribuye a ningún partido.
 
 ### 5. Relaciones propuesta → votación (`datos/relaciones/<eleccion>.yml`, revisado a mano)
 ```yaml
