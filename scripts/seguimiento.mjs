@@ -18,7 +18,8 @@ const TIPOS_PARTIDO = ['estatal', 'nacionalista', 'regional'];
 const CONCRECION = ['medida_concreta', 'objetivo_general'];
 const ESTADOS_PROPUESTA = ['propuesta_ia', 'revisada', 'descartada'];
 const ESTADOS_RELACION = ['sugerida_ia', 'confirmada', 'descartada'];
-const VOTO_DIPUTADO = ['si', 'no', 'abstencion', 'no_vota'];
+const VOTO_COMPACTO = { S: 'si', N: 'no', A: 'abstencion', X: 'no_vota' };
+const BASE36 = '0123456789abcdefghijklmnopqrstuvwxyz';
 const VOTO_PARTIDO = ['si', 'no', 'abstencion', 'dividido', 'no_presente'];
 const TIPOS_VOTACION = ['votacion_final', 'toma_en_consideracion', 'enmienda_totalidad', 'convalidacion', 'mocion', 'otra'];
 const TIPOS_EVIDENCIA = ['votacion', 'iniciativa', 'norma'];
@@ -45,11 +46,16 @@ export function valoracionSegunEvidencias(evidencias) {
   return 'sin_actuacion';
 }
 
-/** Voto de un partido a partir del voto de sus diputados. */
-export function votoDePartido(votos) {
-  const emitidos = votos.filter((v) => v !== 'no_vota');
-  if (!emitidos.length) return 'no_presente';
-  return emitidos.every((v) => v === emitidos[0]) ? emitidos[0] : 'dividido';
+/**
+ * Voto de un partido a partir de los recuentos de sus diputados (misma regla que
+ * scripts/agregar_votos.py): la opción con al menos 2/3 de los votos emitidos;
+ * si ninguna llega, «dividido»; sin votos emitidos, «no_presente».
+ */
+export function votoDePartido(c) {
+  const emitidos = c.si + c.no + c.abstencion;
+  if (!emitidos) return 'no_presente';
+  const [opcion, n] = [['si', c.si], ['no', c.no], ['abstencion', c.abstencion]].reduce((a, b) => (b[1] > a[1] ? b : a));
+  return 3 * n >= 2 * emitidos ? opcion : 'dividido';
 }
 
 /** Qué significa el voto de un partido respecto a una propuesta. */
@@ -157,11 +163,17 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
     if (lista(g.partidos).length > 1) aviso(donde, 'grupo con varios partidos: sus votos se atribuyen a todos ellos; mejor repartir por `diputados`');
     grupos.set(clave, g);
   }
+  // Lo que falta en grupos.yml se avisa una sola vez por grupo, no en cada votación.
+  const gruposSinEntrada = new Set();
+  const diputadosSinPartido = new Map(); // "ambito leg: grupo" → nombres
   const partidosDeDiputado = (ambito, leg, grupo, nombre) => {
     const g = grupos.get(`${ambito}/${leg}/${grupo}`);
-    if (!g) return null;
-    if (g.diputados) return g.diputados[nombre] ? [g.diputados[nombre]] : null;
-    return g.partidos;
+    const clave = `${ambito} ${leg}: grupo «${grupo}»`;
+    if (!g) { gruposSinEntrada.add(clave); return []; }
+    if (!g.diputados) return g.partidos;
+    if (g.diputados[nombre]) return [g.diputados[nombre]];
+    diputadosSinPartido.set(clave, (diputadosSinPartido.get(clave) ?? new Set()).add(nombre));
+    return [];
   };
 
   // ── Datos oficiales en bruto (generados por los scripts de descarga) ───────
@@ -188,32 +200,47 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
         if (!URL_OK.test(v.url_oficial ?? '')) error(donde, 'url_oficial debe ser un enlace http(s)');
 
         // Recuentos y voto por partido recalculados desde el voto de cada diputado.
-        const diputados = lista(v.diputados);
-        if (!diputados.length) { aviso(donde, 'sin voto por diputado: no se puede comprobar el voto por partido'); continue; }
-        const cuenta = { si: 0, no: 0, abstencion: 0, no_vota: 0 };
-        const votosPorPartido = new Map();
-        for (const d of diputados) {
-          if (!VOTO_DIPUTADO.includes(d?.voto)) { error(donde, `voto de ${d?.nombre} inválido: ${d?.voto}`); continue; }
-          cuenta[d.voto]++;
-          const ids = partidosDeDiputado(ambito, leg, d.grupo, d.nombre);
-          if (!ids) { error(donde, `sin partido para ${d.nombre} (${d.grupo}): añádelo en grupos.yml`); continue; }
-          ids.forEach((id) => votosPorPartido.set(id, [...(votosPorPartido.get(id) ?? []), d.voto]));
+        if (v.asentimiento) continue;
+        const votos = v.votos ?? '';
+        const gruposVot = v.grupos ?? '';
+        if (typeof votos !== 'string' || typeof gruposVot !== 'string' || votos.length !== gruposVot.length) {
+          error(donde, '`votos` y `grupos` deben ser textos de la misma longitud'); continue;
         }
-        for (const k of Object.keys(cuenta)) {
-          if (v.totales?.[k] !== cuenta[k]) error(donde, `totales.${k} (${v.totales?.[k]}) no cuadra con el voto de los diputados (${cuenta[k]})`);
+        const cuenta = { si: 0, no: 0, abstencion: 0, no_vota: 0 };
+        const porPartido = new Map();
+        for (let i = 0; i < votos.length; i++) {
+          if (votos[i] === '.') { if (gruposVot[i] !== '.') error(donde, `posición ${i}: grupo sin voto`); continue; }
+          const voto = VOTO_COMPACTO[votos[i]];
+          const grupo = datos.grupos?.[BASE36.indexOf(gruposVot[i])];
+          const nombre = datos.diputados?.[i];
+          if (!voto || grupo == null || nombre == null) { error(donde, `posición ${i}: voto, grupo o diputado inválidos`); continue; }
+          cuenta[voto]++;
+          for (const id of partidosDeDiputado(ambito, leg, grupo, nombre)) {
+            if (!porPartido.has(id)) porPartido.set(id, { si: 0, no: 0, abstencion: 0, no_vota: 0 });
+            porPartido.get(id)[voto]++;
+          }
+        }
+        for (const k of ['si', 'no', 'abstencion']) {
+          if (v.totales?.[k] != null && v.totales[k] !== cuenta[k]) aviso(donde, `totales oficiales: ${k} = ${v.totales[k]}, pero la lista de diputados da ${cuenta[k]}`);
         }
         const declarado = v.por_partido ?? {};
-        for (const [id, votos] of votosPorPartido) {
-          const esperado = votoDePartido(votos);
-          if (declarado[id] !== esperado) error(donde, `por_partido.${id} debería ser «${esperado}» (es «${declarado[id]}»)`);
+        for (const [id, c] of porPartido) {
+          const d = declarado[id];
+          const esperado = votoDePartido(c);
+          if (!d) { if (Object.keys(declarado).length) error(donde, `falta por_partido.${id} (ejecuta scripts/agregar_votos.py)`); continue; }
+          if (d.voto !== esperado || ['si', 'no', 'abstencion', 'no_vota'].some((k) => d[k] !== c[k])) {
+            error(donde, `por_partido.${id} no cuadra con el voto de sus diputados (ejecuta scripts/agregar_votos.py)`);
+          }
         }
-        for (const [id, voto] of Object.entries(declarado)) {
-          if (!VOTO_PARTIDO.includes(voto)) error(donde, `por_partido.${id}: voto inválido`);
-          if (!votosPorPartido.has(id)) error(donde, `por_partido.${id}: ningún diputado de ese partido en la votación`);
+        for (const [id, d] of Object.entries(declarado)) {
+          if (!VOTO_PARTIDO.includes(d?.voto)) error(donde, `por_partido.${id}: voto inválido`);
+          if (!porPartido.has(id)) error(donde, `por_partido.${id}: ningún diputado de ese partido en la votación`);
         }
       }
     }
   }
+  for (const clave of gruposSinEntrada) aviso(`${dir}/grupos.yml`, `${clave} sin entrada: sus votos no cuentan para ningún partido`);
+  for (const [clave, nombres] of diputadosSinPartido) aviso(`${dir}/grupos.yml`, `${clave}: diputados sin partido: ${[...nombres].join('; ')}`);
 
   const iniciativas = new Map();
   for (const ambito of carpetas(join(raiz, dir, 'iniciativas'))) {
@@ -341,7 +368,7 @@ export function validarSeguimiento(raiz, base, { leer, error, aviso }) {
           if (!v) { error(de, 'votación desconocida'); continue; }
           const rel = relaciones.get(`${q.id}|${ev.id}`);
           if (!rel) { error(de, 'no hay relación confirmada entre esta propuesta y esta votación'); continue; }
-          const voto = v.por_partido?.[q.partido];
+          const voto = v.por_partido?.[q.partido]?.voto;
           if (voto == null) { error(de, `no consta el voto de ${q.partido}`); continue; }
           const esperado = sentidoDelVoto(voto, rel.si_equivale_a);
           if (ev.sentido !== esperado) error(de, `sentido debería ser «${esperado}» (votó «${voto}»)`);

@@ -21,4 +21,71 @@
 #   marcas:
 #     - { siglas: UP, ambito: congreso, desde: 2016-05-13, hasta: 2023-06-09 }
 
-[]
+# `desde`/`hasta` de cada marca: periodo seguido en que se presenta con esas siglas.
+# Las coaliciones se siguen como una sola candidatura; sus miembros se indican en `nota`.
+
+- id: psoe
+  nombre: Partido Socialista Obrero Español
+  tipo: estatal
+  color: "#e30613"
+  marcas:
+    - { siglas: PSOE, ambito: congreso, desde: 2016-06-26 }
+  nota: En Cataluña se presenta como PSC-PSOE (se añadirá con su ámbito).
+- id: pp
+  nombre: Partido Popular
+  tipo: estatal
+  color: "#1d84ce"
+  marcas:
+    - { siglas: PP, ambito: congreso, desde: 2016-06-26 }
+- id: vox
+  nombre: Vox
+  tipo: estatal
+  color: "#63be21"
+  marcas:
+    - { siglas: VOX, ambito: congreso, desde: 2016-06-26 }
+- id: cs
+  nombre: Ciudadanos-Partido de la Ciudadanía
+  tipo: estatal
+  color: "#eb6109"
+  marcas:
+    - { siglas: Cs, ambito: congreso, desde: 2016-06-26 }
+- id: unidas-podemos
+  nombre: Unidas Podemos (Unidos Podemos en 2016)
+  tipo: estatal
+  color: "#6c3483"
+  coalicion: true
+  marcas:
+    - { siglas: UP, ambito: congreso, desde: 2016-06-26, hasta: 2023-07-22 }
+  nota: Coalición de Podemos, Izquierda Unida y otros, con En Comú Podem y En Marea / Galicia en Común.
+- id: sumar
+  nombre: Sumar
+  tipo: estatal
+  color: "#e5007d"
+  coalicion: true
+  marcas:
+    - { siglas: SUMAR, ambito: congreso, desde: 2023-07-23 }
+  nota: Coalición electoral de 2023 (incluía a Podemos, que después pasó al Grupo Mixto).
+- id: erc
+  nombre: Esquerra Republicana de Catalunya
+  tipo: nacionalista
+  color: "#ffb232"
+  marcas:
+    - { siglas: ERC, ambito: congreso, desde: 2016-06-26 }
+- id: junts
+  nombre: Junts per Catalunya
+  tipo: nacionalista
+  color: "#20c0b2"
+  marcas:
+    - { siglas: JxCat-Junts, ambito: congreso, desde: 2019-04-28 }
+- id: pnv
+  nombre: Partido Nacionalista Vasco (EAJ-PNV)
+  tipo: nacionalista
+  color: "#008000"
+  marcas:
+    - { siglas: EAJ-PNV, ambito: congreso, desde: 2016-06-26 }
+- id: bildu
+  nombre: Euskal Herria Bildu
+  tipo: nacionalista
+  color: "#00a19a"
+  marcas:
+    - { siglas: EH Bildu, ambito: congreso, desde: 2016-06-26 }

@@ -70,6 +70,8 @@ Para cada votación de pleno se guarda:
 - **Voto de cada diputado** (nombre, grupo y voto), solo donde el parlamento lo publique.
 - **Voto agregado por partido**, calculado con `grupos.yml`: sí, no, abstención y no votó. Se marca `dividido` si el partido no votó en bloque.
 
+> **Implementado (fase 2):** `scripts/descargar_congreso.py` + `scripts/agregar_votos.py`. Formato compacto: lista de `diputados` y de códigos de `grupos` por legislatura, y en cada votación un carácter por diputado (`S` sí, `N` no, `A` abstención, `X` no vota, `.` no figura). `por_partido` guarda los recuentos y el voto, que es la opción con al menos 2/3 de los votos emitidos o, si ninguna llega, `dividido`. No se guarda «aprobada/rechazada», porque depende de la mayoría exigida en cada caso: se muestran los recuentos oficiales.
+
 ### 5. Relaciones propuesta → votación (`datos/relaciones/<eleccion>.yml`, revisado a mano)
 ```yaml
 - propuesta: psoe-g2023-alquiler-tope

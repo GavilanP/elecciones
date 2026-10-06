@@ -3,7 +3,7 @@
 - propuesta: alfa-g2027-alquiler-tope
   valoracion: coherente
   evidencias:
-    - { tipo: votacion, id: congreso/L1/2028-03-15/1, sentido: a_favor }
+    - { tipo: votacion, id: congreso/L1/2028-03-15/12-1, sentido: a_favor }
     - { tipo: norma, id: congreso/BF-A-2028-001, sentido: a_favor }
   explicacion: Votó a favor de la ley que limita el alquiler y la aprobó estando en el gobierno.
   revisado_por: Equipo (ejemplo)
@@ -11,14 +11,14 @@
 - propuesta: alfa-g2027-jornada-35
   valoracion: contradictoria
   evidencias:
-    - { tipo: votacion, id: congreso/L1/2028-06-02/3, sentido: en_contra }
+    - { tipo: votacion, id: congreso/L1/2028-06-02/20-3, sentido: en_contra }
   explicacion: Prometió la jornada de 35 horas y votó en contra de tramitar una proposición con esa medida.
   revisado_por: Equipo (ejemplo)
   fecha_revision: 2026-10-06
 - propuesta: beta-g2027-alquiler-libre
   valoracion: coherente
   evidencias:
-    - { tipo: votacion, id: congreso/L1/2028-03-15/1, sentido: a_favor }
+    - { tipo: votacion, id: congreso/L1/2028-03-15/12-1, sentido: a_favor }
   explicacion: Votó en contra de la ley que limita el alquiler, en línea con su propuesta de derogar los topes.
   revisado_por: Equipo (ejemplo)
   fecha_revision: 2026-10-06

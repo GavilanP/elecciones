@@ -118,6 +118,19 @@ datos/seguimiento/
     variaciones/<partido>.yml    cambios entre programas de elecciones consecutivas
 ```
 
+### Votaciones del Congreso (automático, sin IA)
+
+```bash
+pip install pyyaml
+python3 scripts/descargar_congreso.py        # baja lo nuevo de las legislaturas de elecciones.yml
+python3 scripts/agregar_votos.py             # voto de cada partido y lista de diputados sin partido
+node scripts/validar.mjs
+```
+
+Lo hace solo el workflow *Actualizar votaciones del Congreso*, cada lunes. También se puede lanzar desde la pestaña *Actions*. Las votaciones se guardan en formato compacto, con un carácter por diputado, para que cada legislatura ocupe pocos MB. **Voto de un partido**: la opción que reúne al menos 2/3 de los votos emitidos por sus diputados; si ninguna llega, «dividido». Los recuentos se guardan siempre.
+
+Para el Grupo Mixto (y el Plural en la XIV) hay que asignar cada diputado a su partido en `grupos.yml`. `agregar_votos.py` lista los que faltan.
+
 Hay un ejemplo completo con datos ficticios en `datos/ejemplo/seguimiento/`. `node scripts/validar.mjs` también comprueba este modelo. Entre otras cosas, recalcula el voto de cada partido a partir del de sus diputados, comprueba que la valoración de coherencia sale de las evidencias según las reglas públicas y no deja analizar propuestas sin revisar.
 
 ## Publicar la web (GitHub Pages)

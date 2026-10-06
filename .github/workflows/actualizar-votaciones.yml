@@ -1,0 +1,78 @@
+name: Actualizar votaciones del Congreso
+
+# Descarga las votaciones nuevas del Pleno (datos abiertos oficiales), calcula el voto
+# de cada partido, valida y guarda los cambios en la rama en la que se ejecuta.
+on:
+  schedule:
+    - cron: "17 5 * * 1"   # cada lunes a las 05:17 UTC
+  workflow_dispatch:
+    inputs:
+      legislaturas:
+        description: "Legislaturas (p. ej. «XV» o «XIV XV»); vacío = todas"
+        required: false
+        default: ""
+      rehacer:
+        description: "Volver a descargar las legislaturas indicadas enteras"
+        type: boolean
+        default: false
+  push:
+    paths:
+      - scripts/descargar_congreso.py
+      - scripts/agregar_votos.py
+      - datos/seguimiento/elecciones.yml
+      - datos/seguimiento/grupos.yml
+      - .github/workflows/actualizar-votaciones.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-votaciones-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: pip install pyyaml==6.0.2
+
+      - name: Descargar votaciones
+        id: descarga
+        continue-on-error: true   # si falla algún día, se guarda el resto y se marca el error al final
+        env:
+          LEGISLATURAS: ${{ inputs.legislaturas }}
+          REHACER: ${{ inputs.rehacer && '--rehacer' || '' }}
+        run: python3 scripts/descargar_congreso.py $LEGISLATURAS $REHACER
+
+      - name: Voto por partido
+        run: python3 scripts/agregar_votos.py
+
+      - name: Validar
+        run: node scripts/validar.mjs
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add datos/seguimiento/votaciones
+          if git diff --cached --quiet; then
+            echo "Sin votaciones nuevas."
+          else
+            git commit -m "Votaciones del Congreso actualizadas ($(date -u +%F))"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Avisar si algún día no se pudo descargar
+        if: steps.descarga.outcome == 'failure'
+        run: |
+          echo "::error::Algunos días no se pudieron descargar; se reintentarán en la próxima ejecución."
+          exit 1

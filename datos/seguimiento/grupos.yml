@@ -1,18 +1,65 @@
 # Correspondencia grupo parlamentario → partido(s), por ámbito y legislatura.
 # El voto oficial se publica por diputado y grupo; esta tabla permite pasarlo a partido.
-# El nombre del grupo debe coincidir EXACTAMENTE con el de los datos oficiales.
+# `grupo` es el código EXACTO de los datos oficiales (en el Congreso: GS, GP, GMx…);
+# `nombre` es solo para leerlo.
 #
 # - ambito: congreso
 #   legislatura: XIV
-#   grupo: Grupo Parlamentario Socialista
+#   grupo: GS
+#   nombre: Grupo Socialista
 #   partidos: [psoe]          # un solo partido: todos sus diputados cuentan para él
 #
 # Grupos con varios partidos (p. ej. el Mixto): se reparte diputado a diputado.
 #
 # - ambito: congreso
 #   legislatura: XIV
-#   grupo: Grupo Parlamentario Mixto
+#   grupo: GMx
+#   nombre: Grupo Mixto
 #   diputados:
 #     "Apellidos, Nombre": partido-id
 
-[]
+# Los grupos con varios partidos (Mixto y, en la XIV, Plural) se reparten diputado a
+# diputado. Sus listas se rellenan con lo que muestra `python3 scripts/agregar_votos.py`
+# tras la primera descarga (nombres tal y como vienen en los datos oficiales).
+
+# ── Congreso, XII legislatura (seguida desde el 2 de junio de 2018) ─────────────
+- { ambito: congreso, legislatura: XII, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
+- { ambito: congreso, legislatura: XII, grupo: GP, nombre: Grupo Popular, partidos: [pp] }
+- { ambito: congreso, legislatura: XII, grupo: GCUP-EC-EM, nombre: Grupo Confederal Unidos Podemos-En Comú Podem-En Marea, partidos: [unidas-podemos] }
+- { ambito: congreso, legislatura: XII, grupo: GCs, nombre: Grupo Ciudadanos, partidos: [cs] }
+- { ambito: congreso, legislatura: XII, grupo: GER, nombre: Grupo de Esquerra Republicana, partidos: [erc] }
+- { ambito: congreso, legislatura: XII, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
+- { ambito: congreso, legislatura: XII, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+
+# ── Congreso, XIII legislatura ──────────────────────────────────────────────────
+- { ambito: congreso, legislatura: XIII, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
+- { ambito: congreso, legislatura: XIII, grupo: GP, nombre: Grupo Popular, partidos: [pp] }
+- { ambito: congreso, legislatura: XIII, grupo: GCs, nombre: Grupo Ciudadanos, partidos: [cs] }
+- { ambito: congreso, legislatura: XIII, grupo: GCUP-EC-GC, nombre: Grupo Confederal Unidas Podemos-En Comú Podem-Galicia en Común, partidos: [unidas-podemos] }
+- { ambito: congreso, legislatura: XIII, grupo: GVOX, nombre: Grupo VOX, partidos: [vox] }
+- { ambito: congreso, legislatura: XIII, grupo: GR, nombre: Grupo Republicano, partidos: [erc] }
+- { ambito: congreso, legislatura: XIII, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
+- { ambito: congreso, legislatura: XIII, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+
+# ── Congreso, XIV legislatura ───────────────────────────────────────────────────
+- { ambito: congreso, legislatura: XIV, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
+- { ambito: congreso, legislatura: XIV, grupo: GP, nombre: Grupo Popular, partidos: [pp] }
+- { ambito: congreso, legislatura: XIV, grupo: GVOX, nombre: Grupo VOX, partidos: [vox] }
+- { ambito: congreso, legislatura: XIV, grupo: GCUP-EC-GC, nombre: Grupo Confederal Unidas Podemos-En Comú Podem-Galicia en Común, partidos: [unidas-podemos] }
+- { ambito: congreso, legislatura: XIV, grupo: GR, nombre: Grupo Republicano, partidos: [erc] }
+- { ambito: congreso, legislatura: XIV, grupo: GCs, nombre: Grupo Ciudadanos, partidos: [cs] }
+- { ambito: congreso, legislatura: XIV, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
+- { ambito: congreso, legislatura: XIV, grupo: GEH Bildu, nombre: Grupo Euskal Herria Bildu, partidos: [bildu] }
+- { ambito: congreso, legislatura: XIV, grupo: GPlu, nombre: Grupo Plural, diputados: {} }
+- { ambito: congreso, legislatura: XIV, grupo: GMx, nombre: Grupo Mixto, diputados: {} }
+
+# ── Congreso, XV legislatura ────────────────────────────────────────────────────
+- { ambito: congreso, legislatura: XV, grupo: GS, nombre: Grupo Socialista, partidos: [psoe] }
+- { ambito: congreso, legislatura: XV, grupo: GP, nombre: Grupo Popular, partidos: [pp] }
+- { ambito: congreso, legislatura: XV, grupo: GVOX, nombre: Grupo VOX, partidos: [vox] }
+- { ambito: congreso, legislatura: XV, grupo: GSUMAR, nombre: Grupo Plurinacional SUMAR, partidos: [sumar] }
+- { ambito: congreso, legislatura: XV, grupo: GR, nombre: Grupo Republicano, partidos: [erc] }
+- { ambito: congreso, legislatura: XV, grupo: GJxCAT, nombre: Grupo Junts per Catalunya, partidos: [junts] }
+- { ambito: congreso, legislatura: XV, grupo: GEH Bildu, nombre: Grupo Euskal Herria Bildu, partidos: [bildu] }
+- { ambito: congreso, legislatura: XV, grupo: GV (EAJ-PNV), nombre: Grupo Vasco (EAJ-PNV), partidos: [pnv] }
+- { ambito: congreso, legislatura: XV, grupo: GMx, nombre: Grupo Mixto, diputados: {} }

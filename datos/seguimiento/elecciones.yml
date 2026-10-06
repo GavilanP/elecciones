@@ -21,19 +21,29 @@ legislaturas:
     inicio: 2016-07-19
     fin: 2019-03-05
     seguimiento_desde: 2018-06-02   # moción de censura: Pedro Sánchez presidente
+    gobierno:
+      - { partidos: [pp], desde: 2016-11-04, hasta: 2018-06-01 }
+      - { partidos: [psoe], desde: 2018-06-02 }
   - id: XIII
     ambito: congreso
     inicio: 2019-05-21
     fin: 2019-09-24
+    gobierno:
+      - { partidos: [psoe], desde: 2019-05-21 }   # en funciones
   - id: XIV
     ambito: congreso
     inicio: 2019-12-03
     fin: 2023-05-30
+    gobierno:
+      - { partidos: [psoe], desde: 2019-12-03, hasta: 2020-01-12 }   # en funciones
+      - { partidos: [psoe, unidas-podemos], desde: 2020-01-13 }      # gobierno de coalición
   - id: XV
     ambito: congreso
     inicio: 2023-08-17
-    fin:              # comprobar si ha habido disolución y elecciones posteriores
-  # `gobierno` se añadirá cuando estén dados de alta los partidos en partidos.yml.
+    fin:              # en curso (hay votaciones en septiembre de 2026)
+    gobierno:
+      - { partidos: [psoe, unidas-podemos], desde: 2023-08-17, hasta: 2023-11-20 }   # en funciones
+      - { partidos: [psoe, sumar], desde: 2023-11-21 }
 
 elecciones:
   # La XII salió de las generales de 2016: su programa es el que se contrasta con
