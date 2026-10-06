@@ -1,0 +1,13 @@
+# DATOS FICTICIOS — modelo de seguimiento (docs/PLAN-datos.md).
+- id: congreso
+  nombre: Estado ficticio
+  nivel: estatal
+  parlamento: Congreso ficticio
+  datos_votaciones: https://example.org/congreso/datos
+  boletin: Boletín ficticio
+- id: norte
+  nombre: Región Norte (ficticia)
+  nivel: autonomico
+  parlamento: Parlamento del Norte
+  datos_votaciones: https://example.org/norte/datos
+  boletin: Boletín del Norte

@@ -1,0 +1,16 @@
+# DATOS FICTICIOS
+partido: beta
+eleccion: generales-2027
+url: https://example.org/beta/programa-2027.pdf
+sha256: "2222222222222222222222222222222222222222222222222222222222222222"
+paginas: 80
+fecha_descarga: 2027-03-29
+propuestas:
+  - id: beta-g2027-alquiler-libre
+    tema: vivienda
+    asunto: alquiler-limite
+    texto: Derogar los límites al precio del alquiler.
+    cita: "Derogaremos cualquier tope al precio del alquiler."
+    pagina: 17
+    concrecion: medida_concreta
+    estado: revisada

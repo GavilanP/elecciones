@@ -98,6 +98,28 @@ La validación también se ejecuta automáticamente en GitHub en cada cambio (pe
 
 También se pueden editar los ficheros directamente desde la web de GitHub (icono del lápiz). La validación avisará si algo está mal.
 
+## Seguimiento desde junio de 2018 (en construcción)
+
+Ampliación para contrastar los **programas electorales** de cada partido con lo que han **votado, propuesto y hecho** en el Congreso y en los parlamentos autonómicos. El plan completo está en [`docs/PLAN-datos.md`](docs/PLAN-datos.md): qué datos se sacan, de dónde, qué hace un script y qué propone la IA (siempre con revisión humana).
+
+```
+datos/seguimiento/
+  ambitos.yml              Congreso y parlamentos autonómicos seguidos
+  elecciones.yml           legislaturas (con quién gobernaba) y elecciones
+  partidos.yml             partidos y sus marcas por ámbito (PSC = PSOE en Cataluña), coaliciones
+  grupos.yml               grupo parlamentario → partido (el Mixto, diputado a diputado)
+  programas/<eleccion>/<partido>.yml   propuestas con cita literal y página
+  votaciones/<ambito>/<legislatura>.json   BRUTO, generado por script
+  iniciativas/<ambito>/<legislatura>.json  BRUTO, generado por script
+  normas/<ambito>.json                     BRUTO, generado por script (BOE / boletín autonómico)
+  relaciones/<eleccion>.yml    qué votación tiene que ver con qué propuesta
+  analisis/                    ANÁLISIS PROPIO («Elaborado por nosotros»)
+    coherencia/<eleccion>.yml    programa frente a hechos
+    variaciones/<partido>.yml    cambios entre programas de elecciones consecutivas
+```
+
+Hay un ejemplo completo con datos ficticios en `datos/ejemplo/seguimiento/`. `node scripts/validar.mjs` también comprueba este modelo. Entre otras cosas, recalcula el voto de cada partido a partir del de sus diputados, comprueba que la valoración de coherencia sale de las evidencias según las reglas públicas y no deja analizar propuestas sin revisar.
+
 ## Publicar la web (GitHub Pages)
 
 1. El repositorio debe ser público: *Settings → General → Danger Zone → Change visibility*.

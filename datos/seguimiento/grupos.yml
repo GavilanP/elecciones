@@ -1,0 +1,18 @@
+# Correspondencia grupo parlamentario → partido(s), por ámbito y legislatura.
+# El voto oficial se publica por diputado y grupo; esta tabla permite pasarlo a partido.
+# El nombre del grupo debe coincidir EXACTAMENTE con el de los datos oficiales.
+#
+# - ambito: congreso
+#   legislatura: XIV
+#   grupo: Grupo Parlamentario Socialista
+#   partidos: [psoe]          # un solo partido: todos sus diputados cuentan para él
+#
+# Grupos con varios partidos (p. ej. el Mixto): se reparte diputado a diputado.
+#
+# - ambito: congreso
+#   legislatura: XIV
+#   grupo: Grupo Parlamentario Mixto
+#   diputados:
+#     "Apellidos, Nombre": partido-id
+
+[]

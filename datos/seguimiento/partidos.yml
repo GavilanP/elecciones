@@ -1,0 +1,24 @@
+# Partidos que se siguen (identidad que se compara) y sus marcas en cada ámbito.
+# Es independiente de datos/partidos.yml, que solo recoge las candidaturas de las
+# próximas generales para la web actual.
+#
+# - id: psoe
+#   nombre: Partido Socialista Obrero Español
+#   tipo: estatal             # estatal | nacionalista | regional
+#   color: "#777777"
+#   marcas:                   # nombre con el que se presenta en cada ámbito
+#     - { siglas: PSOE, ambito: congreso, desde: 2018-06-02 }
+#     - { siglas: PSC-PSOE, ambito: cataluna, desde: 2018-06-02 }
+#
+# Coaliciones: se dan de alta como un partido más con `miembros` y fechas.
+#
+# - id: unidas-podemos
+#   nombre: Unidas Podemos
+#   tipo: estatal
+#   color: "#777777"
+#   coalicion: true
+#   miembros: [podemos, iu]
+#   marcas:
+#     - { siglas: UP, ambito: congreso, desde: 2016-05-13, hasta: 2023-06-09 }
+
+[]

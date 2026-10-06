@@ -1,0 +1,18 @@
+# DATOS FICTICIOS — ANÁLISIS PROPIO: cómo cambia el programa de Alfa entre elecciones.
+partido: alfa
+comparaciones:
+  - de: generales-2027
+    a: generales-2029
+    cambios:
+      - tipo: cambiada
+        antes: alfa-g2027-alquiler-tope
+        despues: alfa-g2029-alquiler-tope
+        explicacion: Pasa de limitar el alquiler de forma general a hacerlo solo de forma temporal.
+      - tipo: retirada
+        antes: alfa-g2027-jornada-35
+        explicacion: La jornada de 35 horas desaparece del programa.
+      - tipo: nueva
+        despues: alfa-g2029-vivienda-publica
+        explicacion: Aparece un objetivo cuantificado de vivienda pública.
+    revisado_por: Equipo (ejemplo)
+    fecha_revision: 2026-10-06

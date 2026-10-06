@@ -1,0 +1,24 @@
+# DATOS FICTICIOS
+partido: alfa
+eleccion: generales-2029
+url: https://example.org/alfa/programa-2029.pdf
+sha256: "1111111111111111111111111111111111111111111111111111111111111111"
+paginas: 98
+fecha_descarga: 2029-03-28
+propuestas:
+  - id: alfa-g2029-alquiler-tope
+    tema: vivienda
+    asunto: alquiler-limite
+    texto: Limitar el alquiler solo de forma temporal y en zonas tensionadas.
+    cita: "Cualquier limitación del alquiler será temporal y limitada a las zonas tensionadas."
+    pagina: 30
+    concrecion: medida_concreta
+    estado: revisada
+  - id: alfa-g2029-vivienda-publica
+    tema: vivienda
+    asunto: vivienda-publica
+    texto: Construir 50.000 viviendas públicas en alquiler.
+    cita: "Construiremos 50.000 viviendas públicas destinadas al alquiler."
+    pagina: 33
+    concrecion: medida_concreta
+    estado: revisada

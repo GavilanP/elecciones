@@ -1,0 +1,22 @@
+# DATOS FICTICIOS — estos partidos no existen.
+- id: alfa
+  nombre: Partido Alfa (ficticio)
+  tipo: estatal
+  color: "#b5651d"
+  marcas:
+    - { siglas: ALFA, ambito: congreso, desde: 2027-01-01 }
+    - { siglas: ALFA-N, ambito: norte, desde: 2027-01-01 }   # mismo partido, otro nombre en la región
+- id: beta
+  nombre: Partido Beta (ficticio)
+  tipo: estatal
+  color: "#5a6e8c"
+  marcas:
+    - { siglas: BETA, ambito: congreso, desde: 2027-01-01 }
+    - { siglas: BETA, ambito: norte, desde: 2027-01-01 }
+- id: gamma
+  nombre: Gamma Norteña (ficticia)
+  tipo: nacionalista
+  color: "#7a8450"
+  marcas:   # partido nacionalista: se sigue en los dos ámbitos
+    - { siglas: GN, ambito: congreso, desde: 2027-01-01 }
+    - { siglas: GN, ambito: norte, desde: 2027-01-01 }

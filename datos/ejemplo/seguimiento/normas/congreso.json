@@ -1,0 +1,14 @@
+{
+  "ambito": "congreso",
+  "fuente": "https://example.org/boletin/datos",
+  "generado": "2026-10-06",
+  "normas": [
+    {
+      "id": "BF-A-2028-001",
+      "tipo": "ley",
+      "titulo": "Ley ficticia 1/2028, de regulación del alquiler.",
+      "fecha": "2028-03-30",
+      "url": "https://example.org/boletin/BF-A-2028-001"
+    }
+  ]
+}

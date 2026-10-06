@@ -1,0 +1,25 @@
+# DATOS FICTICIOS
+legislaturas:
+  - id: L1
+    ambito: congreso
+    inicio: 2027-05-01
+    fin: 2029-03-01
+    gobierno:
+      - { partidos: [alfa], desde: 2027-05-20, hasta: 2029-03-01 }
+  - id: L2
+    ambito: congreso
+    inicio: 2029-05-01
+    fin:
+    gobierno:
+      - { partidos: [beta], desde: 2029-05-25 }
+  - id: N1
+    ambito: norte
+    inicio: 2028-06-10
+    fin:
+    gobierno:
+      - { partidos: [gamma], desde: 2028-07-01 }
+
+elecciones:
+  - { id: generales-2027, ambito: congreso, fecha: 2027-04-11, legislatura: L1 }
+  - { id: generales-2029, ambito: congreso, fecha: 2029-04-15, legislatura: L2 }
+  - { id: norte-2028, ambito: norte, fecha: 2028-05-21, legislatura: N1 }

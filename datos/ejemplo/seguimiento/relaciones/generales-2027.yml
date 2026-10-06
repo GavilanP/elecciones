@@ -1,0 +1,18 @@
+# DATOS FICTICIOS — qué votación tiene que ver con qué propuesta.
+- propuesta: alfa-g2027-alquiler-tope
+  votacion: congreso/L1/2028-03-15/1
+  si_equivale_a: a_favor
+  estado: confirmada
+- propuesta: beta-g2027-alquiler-libre
+  votacion: congreso/L1/2028-03-15/1
+  si_equivale_a: en_contra     # votar sí a limitar el alquiler va contra su propuesta
+  estado: confirmada
+- propuesta: alfa-g2027-jornada-35
+  votacion: congreso/L1/2028-06-02/3
+  si_equivale_a: a_favor
+  estado: confirmada
+  nota: La proposición la presentó otro partido.
+- propuesta: alfa-g2027-jornada-35
+  votacion: congreso/L1/2028-03-15/1
+  si_equivale_a: a_favor
+  estado: sugerida_ia          # la IA la sugirió pero nadie la ha confirmado: no cuenta

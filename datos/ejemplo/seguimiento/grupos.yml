@@ -1,0 +1,11 @@
+# DATOS FICTICIOS
+- { ambito: congreso, legislatura: L1, grupo: Grupo Alfa, partidos: [alfa] }
+- { ambito: congreso, legislatura: L1, grupo: Grupo Beta, partidos: [beta] }
+- ambito: congreso
+  legislatura: L1
+  grupo: Grupo Mixto
+  diputados:
+    "Pérez, Ana": gamma
+    "López, Juan": gamma
+- { ambito: norte, legislatura: N1, grupo: Grupo ALFA-N, partidos: [alfa] }
+- { ambito: norte, legislatura: N1, grupo: Grupo Gamma Norteña, partidos: [gamma] }

@@ -1,0 +1,18 @@
+{
+  "ambito": "congreso",
+  "legislatura": "L1",
+  "fuente": "https://example.org/congreso/datos",
+  "generado": "2026-10-06",
+  "iniciativas": [
+    {
+      "id": "122-000004",
+      "tipo": "proposicion_ley",
+      "titulo": "Proposición de ley ficticia de jornada de 35 horas.",
+      "fecha": "2028-04-20",
+      "autor_grupo": "Grupo Mixto",
+      "autor_partidos": ["gamma"],
+      "tramitacion": "rechazada",
+      "url_oficial": "https://example.org/congreso/iniciativa/122-000004"
+    }
+  ]
+}

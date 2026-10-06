@@ -1,0 +1,17 @@
+# Ámbitos que se siguen: el Congreso y, más adelante, los parlamentos autonómicos piloto.
+#
+# - id: congreso              # minúsculas y guiones; se usa en el resto de ficheros
+#   nombre: España
+#   nivel: estatal            # estatal | autonomico
+#   parlamento: Congreso de los Diputados
+#   datos_votaciones: https://...   # de dónde salen las votaciones (portal oficial)
+#   boletin: BOE              # boletín donde se publican sus normas
+
+- id: congreso
+  nombre: España
+  nivel: estatal
+  parlamento: Congreso de los Diputados
+  datos_votaciones: https://www.congreso.es/es/opendata/votaciones
+  boletin: BOE
+
+# Comunidades piloto: pendientes de elegir (fase 5 del plan, docs/PLAN-datos.md).

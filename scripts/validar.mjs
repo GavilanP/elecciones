@@ -9,6 +9,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { load, CORE_SCHEMA } from '../assets/vendor/js-yaml.mjs';
+import { validarSeguimiento } from './seguimiento.mjs';
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -146,8 +147,10 @@ function validarTema(base, idTema, idsPartido) {
   }
 }
 
-validarConjunto('datos');
-validarConjunto('datos/ejemplo');
+for (const base of ['datos', 'datos/ejemplo']) {
+  validarConjunto(base);
+  validarSeguimiento(RAIZ, base, { leer, error, aviso });
+}
 
 console.log(`\n${errores} error(es), ${avisos} aviso(s).`);
 process.exit(errores > 0 ? 1 : 0);

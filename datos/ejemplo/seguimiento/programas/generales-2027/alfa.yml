@@ -1,0 +1,39 @@
+# DATOS FICTICIOS
+partido: alfa
+eleccion: generales-2027
+url: https://example.org/alfa/programa-2027.pdf
+sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+paginas: 120
+fecha_descarga: 2027-03-30
+propuestas:
+  - id: alfa-g2027-alquiler-tope
+    tema: vivienda
+    asunto: alquiler-limite
+    texto: Limitar por ley el precio del alquiler en zonas tensionadas.
+    cita: "Aprobaremos una ley que permita limitar el precio del alquiler en las zonas tensionadas."
+    pagina: 42
+    concrecion: medida_concreta
+    estado: revisada
+  - id: alfa-g2027-jornada-35
+    tema: empleo
+    asunto: jornada-laboral
+    texto: Reducir la jornada laboral máxima a 35 horas semanales.
+    cita: "Reduciremos la jornada laboral máxima a 35 horas semanales sin reducción salarial."
+    pagina: 61
+    concrecion: medida_concreta
+    estado: revisada
+  - id: alfa-g2027-vivienda-general
+    tema: vivienda
+    texto: Mejorar el acceso a la vivienda.
+    cita: "La vivienda será una prioridad de nuestro gobierno."
+    pagina: 40
+    concrecion: objetivo_general   # no se cruza con votaciones
+    estado: revisada
+  - id: alfa-g2027-pisos-turisticos
+    tema: vivienda
+    asunto: pisos-turisticos
+    texto: Moratoria de licencias de pisos turísticos.
+    cita: "Estableceremos una moratoria de nuevas licencias de pisos turísticos."
+    pagina: 44
+    concrecion: medida_concreta
+    estado: propuesta_ia           # pendiente de revisar: no se puede usar todavía
