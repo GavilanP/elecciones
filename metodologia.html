@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metodología · Elecciones: qué propone cada partido</title>
+  <meta name="description" content="Comparador neutral de lo que proponen los partidos para las elecciones generales y de lo que votaron en el Congreso. Cada dato con su fuente.">
+  <meta property="og:title" content="Elecciones: qué propone cada partido">
+  <meta property="og:description" content="Qué propone cada partido, tema a tema, y si coincide con lo que votó. Cada dato con su fuente.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='5' y='12' width='22' height='16' rx='2' fill='%23555'/%3E%3Crect x='12' y='4' width='8' height='12' fill='%23ddd' stroke='%23555' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/estilos.css">
+  <script type="module" src="assets/app.js"></script>
+</head>
+<body data-pagina="estatica">
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="index.html" data-interno>Elecciones · qué propone cada partido</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html" data-interno>Temas</a>
+        <a href="metodologia.html" data-interno aria-current="page">Metodología</a>
+        <a href="https://github.com/gavilanp/elecciones">Código y datos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenedor prosa">
+    <h1>Metodología</h1>
+    <p class="entradilla">Cómo se eligen los partidos, los temas y las fuentes, y cómo leer cada apartado. Si algo no te convence, el historial completo de cambios está en GitHub.</p>
+
+    <h2>Objetivo</h2>
+    <p>Ayudar a comparar lo que proponen los partidos que se presentan a las elecciones generales y contrastarlo con lo que han votado. No se valora si una propuesta es buena, mala o viable, ni se recomienda el voto.</p>
+
+    <h2>Qué partidos se incluyen</h2>
+    <p>Se añade un partido o coalición cuando presenta candidatura a las elecciones generales y publica su programa electoral. Cuando un partido concurre en coalición, se indica en su ficha.</p>
+
+    <h2>Cómo se eligen los temas y las preguntas</h2>
+    <ul>
+      <li>Los temas cubren los asuntos que más preocupan habitualmente en España (vivienda, empleo, sanidad, pensiones…) y los que más dividen a los partidos.</li>
+      <li>Todos los partidos responden a las <strong>mismas preguntas</strong>.</li>
+      <li>Hay dos tipos de pregunta: <strong>de sí o no</strong>, sobre medidas concretas, y <strong>abiertas</strong>, en las que solo se resume lo que propone cada uno.</li>
+      <li>Las preguntas se redactan sin adjetivos valorativos. Si cambia la redacción, queda registrado en el historial del repositorio.</li>
+    </ul>
+
+    <h2>Cómo se documenta una posición</h2>
+    <p>Cada posición lleva su fuente, por este orden de preferencia:</p>
+    <ol>
+      <li>Programa electoral de estas elecciones (con número de página).</li>
+      <li>Otros documentos oficiales del partido.</li>
+      <li>Declaraciones públicas recientes de su candidato o portavoces (con fecha y enlace).</li>
+    </ol>
+    <p>Siempre que se puede se incluye una <strong>cita literal</strong>, porque resumir es donde más fácilmente se cuela un sesgo.</p>
+    <table>
+      <thead><tr><th>Etiqueta</th><th>Significa</th></tr></thead>
+      <tbody>
+        <tr><td><span class="insignia favor">✓ A favor</span></td><td>El partido apoya la medida.</td></tr>
+        <tr><td><span class="insignia contra">✗ En contra</span></td><td>El partido rechaza la medida.</td></tr>
+        <tr><td><span class="insignia matiz">≈ Matizada</span></td><td>La apoya con condiciones, en parte o con una alternativa distinta. El resumen lo explica.</td></tr>
+        <tr><td><span class="insignia nada">— No se pronuncia</span></td><td>Se ha revisado su programa y no dice nada al respecto.</td></tr>
+        <tr><td><span class="insignia pendiente">· Pendiente</span></td><td>Todavía no se ha revisado.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="dicen-hacen">Dicen vs. hacen</h2>
+    <p>Se recogen votaciones del Congreso de los Diputados de la legislatura anterior relacionadas con cada tema, enlazando siempre a la votación oficial.</p>
+    <ul>
+      <li>En el Congreso se vota por <strong>grupo parlamentario</strong>, que puede incluir a varios partidos. Cuando un grupo no votó unido aparece «voto dividido».</li>
+      <li>En cada votación se indica qué significaba votar «sí» respecto a una pregunta concreta (por ejemplo: «votar sí equivalía a estar a favor de limitar el alquiler»).</li>
+      <li>A partir de eso se compara con lo que el partido dice ahora: <strong>coincide</strong>, <strong>coincide en parte</strong> (abstención o postura matizada) o <strong>no coincide</strong>.</li>
+      <li>Una ley incluye muchas cosas y se puede votar en contra por motivos distintos de la medida concreta. Por eso cada votación enlaza a su fuente y puede llevar una nota de contexto. La comparación es un punto de partida, no un veredicto.</li>
+    </ul>
+
+    <h2>Qué no se hace aquí</h2>
+    <ul>
+      <li>No se publican encuestas ni estimaciones de voto. Además, la ley electoral prohíbe difundir sondeos en los cinco días anteriores a la votación.</li>
+      <li>No se recomienda votar a ningún partido.</li>
+      <li>No se valora la calidad ni la viabilidad de las propuestas.</li>
+    </ul>
+
+    <h2>Errores y correcciones</h2>
+    <p>Si encuentras un dato incorrecto o una fuente mejor, <a href="https://github.com/gavilanp/elecciones/issues">abre un aviso en GitHub</a> con el enlace a la fuente. Las correcciones quedan registradas públicamente en el <a href="https://github.com/gavilanp/elecciones/commits/main">historial de cambios</a>.</p>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>Proyecto ciudadano e independiente, sin afiliación a ningún partido. No recomienda el voto.</p>
+      <p id="actualizado"></p>
+      <p>¿Has visto un error? <a href="https://github.com/gavilanp/elecciones/issues">Avísalo en GitHub</a> indicando la fuente.</p>
+    </div>
+  </footer>
+</body>
+</html>

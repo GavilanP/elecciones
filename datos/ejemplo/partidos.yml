@@ -1,0 +1,29 @@
+# DATOS FICTICIOS — estos partidos no existen.
+- id: alfa
+  nombre: Partido Alfa (ficticio)
+  siglas: ALFA
+  color: "#b5651d"
+  web: https://example.org/alfa
+  programa: https://example.org/alfa/programa.pdf
+  grupo_parlamentario: Grupo Alfa
+- id: beta
+  nombre: Partido Beta (ficticio)
+  siglas: BETA
+  color: "#5a6e8c"
+  web: https://example.org/beta
+  programa: https://example.org/beta/programa.pdf
+  grupo_parlamentario: Grupo Beta
+- id: gamma
+  nombre: Coalición Gamma (ficticia)
+  siglas: GAMMA
+  color: "#7a8450"
+  web: https://example.org/gamma
+  programa:
+  grupo_parlamentario: Grupo Mixto
+  nota: Concurre en coalición con otros dos partidos ficticios.
+- id: delta
+  nombre: Partido Delta (ficticio)
+  siglas: DELTA
+  color: "#8a5a83"
+  web: https://example.org/delta
+  programa: https://example.org/delta/programa.pdf

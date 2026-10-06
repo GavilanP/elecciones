@@ -1,0 +1,26 @@
+# Tema: Impuestos
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: impuestos
+titulo: Impuestos
+descripcion: Fiscalidad de personas y empresas.
+
+preguntas:
+  - id: irpf
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre el IRPF?"
+    posiciones: {}
+
+  - id: grandes-fortunas
+    tipo: si_no
+    pregunta: "¿Mantener un impuesto sobre el patrimonio o las grandes fortunas?"
+    posiciones: {}
+
+  - id: gravamenes-banca-energia
+    tipo: si_no
+    pregunta: "¿Aplicar gravámenes especiales a la banca y a las grandes empresas energéticas?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

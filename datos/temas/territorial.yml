@@ -1,0 +1,26 @@
+# Tema: Modelo territorial
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: territorial
+titulo: Modelo territorial
+descripcion: Comunidades autónomas, financiación y encaje territorial.
+
+preguntas:
+  - id: financiacion-autonomica
+    tipo: abierta
+    pregunta: "¿Qué modelo de financiación autonómica proponen?"
+    posiciones: {}
+
+  - id: referendum
+    tipo: si_no
+    pregunta: "¿Permitir un referéndum de autodeterminación en alguna comunidad autónoma?"
+    posiciones: {}
+
+  - id: competencias
+    tipo: abierta
+    pregunta: "¿Proponen transferir más competencias a las comunidades autónomas o devolver algunas al Estado?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

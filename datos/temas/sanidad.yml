@@ -1,0 +1,26 @@
+# Tema: Sanidad
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: sanidad
+titulo: Sanidad
+descripcion: Sistema Nacional de Salud, listas de espera y cobertura.
+
+preguntas:
+  - id: listas-espera
+    tipo: abierta
+    pregunta: "¿Qué medidas proponen para reducir las listas de espera?"
+    posiciones: {}
+
+  - id: gestion-privada
+    tipo: si_no
+    pregunta: "¿Limitar la gestión privada de servicios sanitarios públicos?"
+    posiciones: {}
+
+  - id: dental-publica
+    tipo: si_no
+    pregunta: "¿Incluir la atención dental en la sanidad pública?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

@@ -1,0 +1,26 @@
+# Tema: Educación
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: educacion
+titulo: Educación
+descripcion: Etapas educativas, modelo de centros y lenguas en la enseñanza.
+
+preguntas:
+  - id: educacion-0-3
+    tipo: si_no
+    pregunta: "¿Hacer universal y gratuita la educación de 0 a 3 años?"
+    posiciones: {}
+
+  - id: concertada
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre la educación concertada?"
+    posiciones: {}
+
+  - id: lengua-vehicular
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre las lenguas vehiculares en la enseñanza?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

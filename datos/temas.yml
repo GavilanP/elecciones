@@ -1,0 +1,13 @@
+# Orden en el que aparecen los temas. Cada id corresponde a un fichero en datos/temas/<id>.yml
+- vivienda
+- empleo
+- impuestos
+- pensiones
+- sanidad
+- educacion
+- inmigracion
+- territorial
+- energia-clima
+- exterior-defensa
+- instituciones
+- derechos

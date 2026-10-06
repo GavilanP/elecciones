@@ -1,0 +1,112 @@
+# DATOS FICTICIOS — ejemplo de un tema completo.
+id: vivienda
+titulo: Vivienda
+descripcion: Acceso a la vivienda, alquiler, vivienda pública y ocupación.
+
+preguntas:
+  - id: alquiler-limite
+    tipo: si_no
+    pregunta: "¿Limitar por ley el precio del alquiler en zonas de mercado tensionado?"
+    posiciones:
+      alfa:
+        postura: a_favor
+        resumen: Propone ampliar los límites al alquiler a todas las zonas tensionadas.
+        cita: "Extenderemos la regulación de precios del alquiler a todos los municipios declarados tensionados."
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Alfa
+          url: https://example.org/alfa/programa.pdf
+          pagina: 42
+      beta:
+        postura: en_contra
+        resumen: Considera que limitar precios reduce la oferta; propone incentivos fiscales a quien alquile.
+        cita: "Derogaremos los topes al alquiler y bonificaremos fiscalmente a los propietarios que alquilen por debajo del precio de mercado."
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Beta
+          url: https://example.org/beta/programa.pdf
+          pagina: 17
+      gamma:
+        postura: matizada
+        resumen: Apoya los límites solo de forma temporal y acompañados de construcción pública.
+        cita: "Cualquier limitación de precios debe ser temporal y ligada a un plan de construcción."
+        fuente:
+          tipo: declaracion
+          titulo: Entrevista a su candidata en un medio ficticio
+          url: https://example.org/entrevista
+          fecha: 2029-11-20
+      delta:
+        postura: no_se_pronuncia
+        resumen: Su programa no menciona la regulación de precios del alquiler.
+
+  - id: pisos-turisticos
+    tipo: si_no
+    pregunta: "¿Imponer más restricciones a los pisos turísticos?"
+    posiciones:
+      alfa:
+        postura: a_favor
+        resumen: Moratoria de nuevas licencias en zonas tensionadas.
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Alfa
+          url: https://example.org/alfa/programa.pdf
+          pagina: 44
+      beta:
+        postura: matizada
+        resumen: Deja la decisión a cada ayuntamiento.
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Beta
+          url: https://example.org/beta/programa.pdf
+          pagina: 19
+
+  - id: oferta-vivienda
+    tipo: abierta
+    pregunta: "¿Cómo proponen aumentar la oferta de vivienda asequible?"
+    posiciones:
+      alfa:
+        resumen: Construcción directa de 100.000 viviendas públicas en alquiler en cinco años.
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Alfa
+          url: https://example.org/alfa/programa.pdf
+          pagina: 40
+      beta:
+        resumen: Liberalizar suelo y reducir trámites urbanísticos para que construyan las empresas privadas.
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Beta
+          url: https://example.org/beta/programa.pdf
+          pagina: 15
+
+votaciones:
+  - id: ley-alquiler-2028
+    titulo: Ley ficticia de regulación del alquiler
+    fecha: 2028-03-15
+    tipo: votacion_final
+    descripcion: Votación final de una ley que permitía limitar el precio del alquiler en zonas tensionadas.
+    url: https://example.org/congreso/votacion-123
+    resultado: Aprobada
+    relacionada_con:
+      - pregunta: alquiler-limite
+        si_equivale_a: a_favor
+    votos:
+      alfa: si
+      beta: "no"
+      gamma: si
+    nota: Delta no tenía representación en esa legislatura.
+
+  - id: moratoria-turisticos-2029
+    titulo: Proposición ficticia de moratoria de pisos turísticos
+    fecha: 2029-06-02
+    tipo: toma_en_consideracion
+    descripcion: Toma en consideración de una proposición de ley para suspender nuevas licencias turísticas.
+    url: https://example.org/congreso/votacion-456
+    resultado: Rechazada
+    relacionada_con:
+      - pregunta: pisos-turisticos
+        si_equivale_a: a_favor
+    votos:
+      alfa: abstencion
+      beta: "no"
+      gamma: dividido

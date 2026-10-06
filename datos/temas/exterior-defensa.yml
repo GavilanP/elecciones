@@ -1,0 +1,21 @@
+# Tema: Política exterior y defensa
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: exterior-defensa
+titulo: Política exterior y defensa
+descripcion: Relaciones internacionales, Unión Europea y gasto militar.
+
+preguntas:
+  - id: gasto-defensa
+    tipo: si_no
+    pregunta: "¿Aumentar el gasto en defensa hasta los objetivos fijados por la OTAN?"
+    posiciones: {}
+
+  - id: union-europea
+    tipo: abierta
+    pregunta: "¿Qué papel quieren para España en la Unión Europea?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

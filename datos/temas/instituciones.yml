@@ -1,0 +1,26 @@
+# Tema: Instituciones y corrupción
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: instituciones
+titulo: Instituciones y corrupción
+descripcion: Poder judicial, sistema electoral y lucha contra la corrupción.
+
+preguntas:
+  - id: cgpj
+    tipo: abierta
+    pregunta: "¿Cómo proponen elegir a los miembros del Consejo General del Poder Judicial?"
+    posiciones: {}
+
+  - id: ley-electoral
+    tipo: si_no
+    pregunta: "¿Reformar la ley electoral?"
+    posiciones: {}
+
+  - id: corrupcion
+    tipo: abierta
+    pregunta: "¿Qué medidas proponen contra la corrupción?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

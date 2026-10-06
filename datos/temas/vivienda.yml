@@ -1,0 +1,31 @@
+# Tema: Vivienda
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: vivienda
+titulo: Vivienda
+descripcion: Acceso a la vivienda, alquiler, vivienda pública y ocupación.
+
+preguntas:
+  - id: alquiler-limite
+    tipo: si_no
+    pregunta: "¿Limitar por ley el precio del alquiler en zonas de mercado tensionado?"
+    posiciones: {}
+
+  - id: pisos-turisticos
+    tipo: si_no
+    pregunta: "¿Imponer más restricciones a los pisos turísticos?"
+    posiciones: {}
+
+  - id: ocupacion
+    tipo: si_no
+    pregunta: "¿Agilizar los desalojos en casos de ocupación ilegal de viviendas?"
+    posiciones: {}
+
+  - id: oferta-vivienda
+    tipo: abierta
+    pregunta: "¿Cómo proponen aumentar la oferta de vivienda asequible?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

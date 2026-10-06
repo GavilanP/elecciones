@@ -1,0 +1,17 @@
+# Partidos incluidos en el comparador.
+#
+# Criterio: se añade un partido cuando presenta candidatura a las elecciones
+# generales y publica su programa electoral.
+#
+# Plantilla (copia el bloque, quita las almohadillas y rellena):
+#
+# - id: nombre-corto          # minúsculas y guiones; se usa en los demás ficheros
+#   nombre: Nombre completo del partido o coalición
+#   siglas: SIGLAS
+#   color: "#777777"          # color identificativo, en hexadecimal
+#   web: https://...
+#   programa:                 # enlace al programa electoral 2026 (vacío hasta que se publique)
+#   grupo_parlamentario: Nombre del grupo en la legislatura anterior (si tenía)
+#   nota: Aclaración opcional (p. ej. "concurre en coalición con...")
+
+[]

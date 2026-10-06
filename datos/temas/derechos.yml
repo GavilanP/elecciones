@@ -1,0 +1,26 @@
+# Tema: Derechos y libertades
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: derechos
+titulo: Derechos y libertades
+descripcion: Igualdad, derechos civiles y libertades individuales.
+
+preguntas:
+  - id: aborto-constitucion
+    tipo: si_no
+    pregunta: "¿Incluir el derecho al aborto en la Constitución?"
+    posiciones: {}
+
+  - id: eutanasia
+    tipo: si_no
+    pregunta: "¿Mantener la ley de eutanasia?"
+    posiciones: {}
+
+  - id: violencia-genero
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre la violencia de género?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

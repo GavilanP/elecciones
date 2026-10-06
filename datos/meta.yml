@@ -1,0 +1,6 @@
+# Información general del sitio.
+elecciones: Elecciones generales
+# Fecha de la votación (AAAA-MM-DD). Déjalo vacío hasta que se publique la convocatoria en el BOE.
+fecha_votacion:
+# Fecha de la última revisión de los datos (AAAA-MM-DD).
+actualizado: 2026-10-06

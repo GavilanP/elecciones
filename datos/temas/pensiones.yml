@@ -1,0 +1,26 @@
+# Tema: Pensiones
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: pensiones
+titulo: Pensiones
+descripcion: Cuantía, revalorización y sostenibilidad del sistema público de pensiones.
+
+preguntas:
+  - id: revalorizacion-ipc
+    tipo: si_no
+    pregunta: "¿Revalorizar todas las pensiones según el IPC?"
+    posiciones: {}
+
+  - id: edad-jubilacion
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre la edad de jubilación?"
+    posiciones: {}
+
+  - id: sostenibilidad-pensiones
+    tipo: abierta
+    pregunta: "¿Cómo proponen garantizar la sostenibilidad del sistema?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

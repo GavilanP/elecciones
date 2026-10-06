@@ -1,0 +1,26 @@
+# Tema: Empleo y salarios
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: empleo
+titulo: Empleo y salarios
+descripcion: Condiciones laborales, jornada, contratación y salario mínimo.
+
+preguntas:
+  - id: jornada-laboral
+    tipo: si_no
+    pregunta: "¿Reducir por ley la jornada laboral máxima por debajo de 40 horas semanales?"
+    posiciones: {}
+
+  - id: reforma-laboral
+    tipo: si_no
+    pregunta: "¿Mantener la reforma laboral de 2021 (Real Decreto-ley 32/2021)?"
+    posiciones: {}
+
+  - id: salario-minimo
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre el salario mínimo interprofesional?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

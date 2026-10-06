@@ -1,0 +1,20 @@
+# DATOS FICTICIOS — ejemplo de un tema a medio rellenar.
+id: empleo
+titulo: Empleo y salarios
+descripcion: Condiciones laborales, jornada, contratación y salario mínimo.
+
+preguntas:
+  - id: jornada-laboral
+    tipo: si_no
+    pregunta: "¿Reducir por ley la jornada laboral máxima por debajo de 40 horas semanales?"
+    posiciones:
+      alfa:
+        postura: a_favor
+        resumen: Jornada de 37,5 horas en dos años.
+        fuente:
+          tipo: programa
+          titulo: Programa electoral 2030 de Alfa
+          url: https://example.org/alfa/programa.pdf
+          pagina: 60
+
+votaciones: []

@@ -1,0 +1,26 @@
+# Tema: Inmigración
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: inmigracion
+titulo: Inmigración
+descripcion: Llegadas, integración y situación administrativa de las personas migrantes.
+
+preguntas:
+  - id: regularizacion
+    tipo: si_no
+    pregunta: "¿Aprobar una regularización extraordinaria de personas migrantes en situación irregular?"
+    posiciones: {}
+
+  - id: llegadas-irregulares
+    tipo: abierta
+    pregunta: "¿Cómo proponen gestionar las llegadas irregulares?"
+    posiciones: {}
+
+  - id: menores-no-acompanados
+    tipo: abierta
+    pregunta: "¿Cómo proponen atender y repartir a los menores migrantes no acompañados?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []

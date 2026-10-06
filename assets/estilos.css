@@ -1,0 +1,179 @@
+/* Paleta deliberadamente neutra: grises y papel, sin colores asociados a partidos.
+   Los únicos colores de partido son los que vienen de datos/partidos.yml. */
+:root {
+  --fondo: #f7f5f0;
+  --superficie: #ffffff;
+  --superficie-2: #efece5;
+  --tinta: #1c1b19;
+  --tinta-suave: #5c5850;
+  --borde: #dcd7cc;
+  --enlace: #1c1b19;
+  --favor: #2f6b45;
+  --favor-fondo: #e3efe6;
+  --contra: #9a3324;
+  --contra-fondo: #f6e2de;
+  --matiz: #7a5a12;
+  --matiz-fondo: #f4ead2;
+  --nada: #6b675f;
+  --nada-fondo: #ebe8e1;
+  --aviso-fondo: #fff3c4;
+  --aviso-borde: #d8b74a;
+  --radio: 10px;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #151513;
+    --superficie: #1e1d1b;
+    --superficie-2: #282724;
+    --tinta: #ece9e2;
+    --tinta-suave: #a6a198;
+    --borde: #3a3834;
+    --enlace: #ece9e2;
+    --favor: #8cc79f;
+    --favor-fondo: #1f3326;
+    --contra: #e79a8c;
+    --contra-fondo: #3a2220;
+    --matiz: #dcbc6e;
+    --matiz-fondo: #362d17;
+    --nada: #a6a198;
+    --nada-fondo: #2a2926;
+    --aviso-fondo: #3a3216;
+    --aviso-borde: #8a7428;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font: 16px/1.55 var(--sans);
+}
+
+a { color: var(--enlace); text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+
+h1, h2, h3 { font-family: var(--serif); line-height: 1.2; margin: 0 0 .5em; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); }
+h2 { font-size: 1.5rem; margin-top: 2rem; }
+h3 { font-size: 1.15rem; }
+
+.contenedor { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+/* Cabecera y pie */
+.cabecera { border-bottom: 1px solid var(--borde); background: var(--superficie); }
+.cabecera .contenedor { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: .8rem; flex-wrap: wrap; }
+.marca { font-family: var(--serif); font-weight: 700; font-size: 1.15rem; text-decoration: none; }
+.nav { display: flex; gap: 1.1rem; font-size: .95rem; }
+.nav a { text-decoration: none; color: var(--tinta-suave); }
+.nav a:hover, .nav a[aria-current="page"] { color: var(--tinta); text-decoration: underline; }
+
+.pie { margin-top: 4rem; border-top: 1px solid var(--borde); padding: 1.5rem 0 3rem; color: var(--tinta-suave); font-size: .9rem; }
+.pie p { margin: .3rem 0; }
+
+main { padding-top: 2rem; }
+
+.entradilla { font-size: 1.1rem; color: var(--tinta-suave); max-width: 46rem; }
+
+/* Avisos */
+.aviso { background: var(--aviso-fondo); border: 1px solid var(--aviso-borde); border-radius: var(--radio); padding: .8rem 1rem; margin: 1rem 0; }
+.aviso p { margin: .2rem 0; }
+.banda-demo { background: var(--aviso-fondo); border-bottom: 1px solid var(--aviso-borde); text-align: center; padding: .5rem 16px; font-weight: 600; font-size: .95rem; }
+
+/* Principios */
+.principios { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .8rem; margin: 1.5rem 0; padding: 0; list-style: none; }
+.principios li { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: .9rem 1rem; font-size: .95rem; }
+.principios strong { display: block; font-family: var(--serif); font-size: 1.05rem; margin-bottom: .2rem; }
+
+/* Rejilla de temas */
+.temas { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .8rem; padding: 0; list-style: none; }
+.tarjeta-tema { display: block; height: 100%; background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 1rem; text-decoration: none; transition: border-color .15s; }
+.tarjeta-tema:hover { border-color: var(--tinta-suave); }
+.tarjeta-tema h3 { margin-bottom: .3rem; }
+.tarjeta-tema p { margin: 0 0 .7rem; color: var(--tinta-suave); font-size: .93rem; }
+.progreso { height: 6px; background: var(--superficie-2); border-radius: 3px; overflow: hidden; }
+.progreso span { display: block; height: 100%; background: var(--tinta-suave); }
+.progreso-texto { font-size: .82rem; color: var(--tinta-suave); margin-top: .35rem; }
+
+/* Partidos */
+.partidos { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; list-style: none; }
+.punto { display: inline-block; width: .7em; height: .7em; border-radius: 50%; flex: none; }
+
+.filtro { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1rem 0 0; align-items: center; }
+.filtro-titulo { font-size: .85rem; color: var(--tinta-suave); margin-right: .2rem; }
+.chip { display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--borde); background: var(--superficie); color: var(--tinta); border-radius: 999px; padding: .3rem .75rem; font: inherit; font-size: .9rem; cursor: pointer; }
+.chip[aria-pressed="false"] { opacity: .45; text-decoration: line-through; }
+.chip:focus-visible, .tarjeta-tema:focus-visible { outline: 2px solid var(--tinta); outline-offset: 2px; }
+
+/* Pestañas de sección dentro del tema */
+.indice-tema { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .95rem; margin-top: 1rem; }
+
+/* Matriz resumen */
+.matriz-envoltorio { overflow-x: auto; border: 1px solid var(--borde); border-radius: var(--radio); background: var(--superficie); margin-top: 1rem; }
+.matriz { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.matriz th, .matriz td { padding: .55rem .6rem; border-bottom: 1px solid var(--borde); text-align: center; vertical-align: middle; }
+.matriz tr:last-child td, .matriz tr:last-child th { border-bottom: 0; }
+.matriz thead th { font-weight: 600; white-space: nowrap; background: var(--superficie-2); }
+.matriz tbody th { text-align: left; font-weight: 400; min-width: 14rem; }
+.matriz tbody th a { text-decoration: none; }
+.matriz tbody th a:hover { text-decoration: underline; }
+
+/* Insignias de postura / voto */
+.insignia { display: inline-flex; align-items: center; gap: .3rem; padding: .12rem .55rem; border-radius: 999px; font-size: .82rem; font-weight: 600; white-space: nowrap; }
+.insignia.favor { color: var(--favor); background: var(--favor-fondo); }
+.insignia.contra { color: var(--contra); background: var(--contra-fondo); }
+.insignia.matiz { color: var(--matiz); background: var(--matiz-fondo); }
+.insignia.nada { color: var(--nada); background: var(--nada-fondo); }
+.insignia.pendiente { color: var(--tinta-suave); background: transparent; border: 1px dashed var(--borde); font-weight: 400; }
+
+/* Tarjetas de pregunta y votación */
+.bloque { background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio); padding: 1.1rem 1.1rem .4rem; margin: 1rem 0; scroll-margin-top: 1rem; }
+.bloque:target { border-color: var(--tinta); box-shadow: 0 0 0 1px var(--tinta); }
+.bloque-cabecera { display: flex; justify-content: space-between; gap: .8rem; align-items: baseline; }
+.bloque-cabecera h3 { margin: 0 0 .4rem; }
+.enlace-ancla { font-size: .85rem; color: var(--tinta-suave); text-decoration: none; flex: none; }
+.meta-bloque { color: var(--tinta-suave); font-size: .88rem; margin: 0 0 .6rem; }
+.descripcion-bloque { margin: 0 0 .6rem; }
+
+.filas { list-style: none; padding: 0; margin: .4rem 0 0; }
+.fila { display: grid; grid-template-columns: 9rem 1fr; gap: .4rem 1rem; padding: .8rem 0; border-top: 1px solid var(--borde); }
+.fila-partido { display: flex; align-items: center; gap: .45rem; font-weight: 600; }
+.fila-cuerpo { min-width: 0; }
+.fila-cuerpo p { margin: .3rem 0; }
+.fila-cuerpo .insignia { margin-right: .3rem; }
+.cita { margin: .5rem 0; padding: .1rem 0 .1rem .8rem; border-left: 3px solid var(--borde); font-family: var(--serif); font-style: italic; color: var(--tinta); }
+.fuente { font-size: .85rem; color: var(--tinta-suave); }
+.fuente a { color: var(--tinta-suave); }
+.sin-datos { color: var(--tinta-suave); font-style: italic; }
+.nota { font-size: .88rem; color: var(--tinta-suave); }
+
+.comparacion { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; font-size: .9rem; }
+.comparacion .etiqueta { color: var(--tinta-suave); }
+.coincide { font-weight: 600; }
+.coincide.si { color: var(--favor); }
+.coincide.no { color: var(--contra); }
+.coincide.parcial { color: var(--matiz); }
+
+.vacio { margin-top: 1rem; background: var(--superficie); border: 1px dashed var(--borde); border-radius: var(--radio); padding: 1.2rem; color: var(--tinta-suave); }
+
+.navegacion-temas { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+
+/* Metodología */
+.prosa { max-width: 46rem; }
+.prosa li { margin: .3rem 0; }
+.prosa table { border-collapse: collapse; margin: 1rem 0; font-size: .93rem; }
+.prosa th, .prosa td { border: 1px solid var(--borde); padding: .4rem .7rem; text-align: left; vertical-align: top; }
+
+.cargando { color: var(--tinta-suave); }
+
+@media (max-width: 600px) {
+  .fila { grid-template-columns: 1fr; }
+  .matriz tbody th { min-width: 11rem; }
+  .bloque { padding-inline: .9rem; }
+}

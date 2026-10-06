@@ -1,0 +1,21 @@
+# Tema: Energía y clima
+# Formato explicado en el README («Cómo añadir datos»).
+# Las posiciones de cada partido se añaden en `posiciones`, siempre con fuente.
+
+id: energia-clima
+titulo: Energía y clima
+descripcion: Transición energética, nucleares y cambio climático.
+
+preguntas:
+  - id: nucleares
+    tipo: si_no
+    pregunta: "¿Mantener el calendario de cierre de las centrales nucleares?"
+    posiciones: {}
+
+  - id: transicion-energetica
+    tipo: abierta
+    pregunta: "¿Qué proponen sobre la transición energética y las renovables?"
+    posiciones: {}
+
+# Votaciones de la legislatura anterior relacionadas con este tema («Dicen vs. hacen»).
+votaciones: []
