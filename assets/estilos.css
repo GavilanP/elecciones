@@ -120,7 +120,8 @@ body {
 img, svg { max-width: 100%; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { text-decoration-thickness: 2px; }
-:focus-visible { outline: 3px solid var(--marcador); outline-offset: 2px; border-radius: 2px; }
+:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; box-shadow: 0 0 0 2px var(--marcador); border-radius: 2px; }
+[hidden] { display: none !important; }
 ::selection { background: var(--marcador); color: var(--sobre-marcador); }
 
 h1, h2, h3 {
@@ -152,6 +153,15 @@ p { margin: 0; }
   -webkit-box-decoration-break: clone;
 }
 .oculto-visual { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.saltar { position: absolute; left: 16px; top: -10rem; z-index: 50; background: var(--marcador); color: var(--sobre-marcador); padding: .6rem 1rem; border-radius: var(--radio); font-weight: 700; }
+.saltar:focus { top: .5rem; }
+.principal:focus { outline: none; }
+
+/* En modo oscuro, el subrayado amarillo bajo texto claro no se lee: se marca el bloque entero con tinta oscura. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .marcado { background: var(--marcador); color: var(--sobre-marcador); padding-inline: .12em; }
+}
+:root[data-theme="dark"] .marcado { background: var(--marcador); color: var(--sobre-marcador); padding-inline: .12em; }
 
 /* ── Barra superior ───────────────────────────────────────────────────────── */
 
@@ -253,6 +263,7 @@ p { margin: 0; }
 @media (max-width: 47.99rem) {
   .nav { display: none; }
   body { padding-bottom: calc(var(--alto-tabbar) + env(safe-area-inset-bottom, 0px)); }
+  html { scroll-padding-bottom: calc(var(--alto-tabbar) + 1rem + env(safe-area-inset-bottom, 0px)); }
   .tabbar {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -374,7 +385,7 @@ p { margin: 0; }
 
 /* Matriz resumen */
 .resumen { margin-top: 2rem; display: grid; gap: .6rem; }
-.matriz-envoltorio { overflow-x: auto; border: 1px solid var(--linea); border-radius: var(--radio); background: var(--hoja); }
+.matriz-envoltorio { position: relative; overflow-x: auto; border: 1px solid var(--linea); border-radius: var(--radio); background: var(--hoja); }
 .matriz { border-collapse: separate; border-spacing: 0; width: 100%; font-size: var(--t-s); }
 .matriz th, .matriz td { padding: .6rem .7rem; border-bottom: 1px solid var(--linea); text-align: center; vertical-align: middle; }
 .matriz tbody tr:last-child > * { border-bottom: 0; }
@@ -502,6 +513,7 @@ p { margin: 0; }
   overflow-wrap: anywhere;
   box-shadow: 0 6px 24px rgb(0 0 0 / .25);
 }
+.aviso-flotante:empty { padding: 0; box-shadow: none; }
 @media (max-width: 47.99rem) { .aviso-flotante { bottom: calc(var(--alto-tabbar) + 1rem + env(safe-area-inset-bottom, 0px)); } }
 
 .aviso { background: var(--marcador-suave); border: 1px solid var(--marcador); border-radius: var(--radio); padding: .9rem 1rem; display: grid; gap: .3rem; }

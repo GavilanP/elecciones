@@ -27,6 +27,7 @@
   <script type="module" src="assets/app.js"></script>
 </head>
 <body data-pagina="estatica">
+  <a class="saltar" href="#contenido-principal">Saltar al contenido</a>
   <header class="barra">
     <div class="barra-interior">
       <a class="marca" href="index.html" data-interno><svg class="marca-icono" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="3" fill="var(--hoja)" stroke="currentColor" stroke-width="2.5"/><path d="M10 10l12 12M22 10L10 22" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg><span>¿Qué propone cada partido?</span></a>
@@ -48,7 +49,7 @@
       </div>
     </aside>
 
-    <main class="principal prosa">
+    <main id="contenido-principal" tabindex="-1" class="principal prosa">
     <h1>Metodología</h1>
     <p class="entradilla">Cómo se eligen los partidos, los temas y las fuentes, y cómo leer cada apartado. Si algo no te convence, el historial completo de cambios está en GitHub.</p>
 
@@ -116,7 +117,7 @@
 
   <nav class="tabbar" aria-label="Navegación">
     <a href="index.html" data-interno><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>Inicio</a>
-    <button type="button" data-accion="temas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/></svg>Temas</button>
+    <button type="button" data-accion="temas" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1" fill="currentColor"/><circle cx="3.5" cy="12" r="1" fill="currentColor"/><circle cx="3.5" cy="18" r="1" fill="currentColor"/></svg>Temas</button>
     <a href="metodologia.html" data-interno aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20v-3"/><path d="M8 8h8M8 12h5"/></svg>Método</a>
     <button type="button" data-accion="compartir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Compartir</button>
   </nav>

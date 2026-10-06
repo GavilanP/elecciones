@@ -75,7 +75,9 @@ function enlace(ruta, extra = {}) {
 
 function enlaceExterno(url, texto) {
   const segura = urlSegura(url);
-  return segura ? el('a', { href: segura, target: '_blank', rel: 'noopener noreferrer' }, texto) : texto;
+  return segura
+    ? el('a', { href: segura, target: '_blank', rel: 'noopener noreferrer' }, texto, el('span', { clase: 'oculto-visual' }, ' (se abre en otra pestaña)'))
+    : texto;
 }
 
 function formatearFecha(iso) {
@@ -85,7 +87,7 @@ function formatearFecha(iso) {
 }
 
 function insignia(info) {
-  return el('span', { clase: `insignia ${info.clase}` }, info.simbolo ? `${info.simbolo} ` : '', info.texto);
+  return el('span', { clase: `insignia ${info.clase}` }, info.simbolo ? el('span', { 'aria-hidden': 'true' }, `${info.simbolo} `) : null, info.texto);
 }
 
 function punto(color) {
@@ -100,12 +102,16 @@ function guardarOcultos(ocultos) {
 }
 
 let temporizadorAviso;
+/** Región viva creada al cargar la página: así los lectores de pantalla anuncian cada aviso. */
+function regionAvisos() {
+  return document.querySelector('.aviso-flotante')
+    ?? document.body.appendChild(el('div', { clase: 'aviso-flotante', role: 'status' }));
+}
 function avisar(texto) {
-  document.querySelector('.aviso-flotante')?.remove();
-  const aviso = el('div', { clase: 'aviso-flotante', role: 'status' }, texto);
-  document.body.append(aviso);
+  const aviso = regionAvisos();
+  aviso.textContent = texto;
   clearTimeout(temporizadorAviso);
-  temporizadorAviso = setTimeout(() => aviso.remove(), 3500);
+  temporizadorAviso = setTimeout(() => { aviso.textContent = ''; }, 3500);
 }
 
 /** Comparte con el menú nativo del móvil; si no existe, copia el enlace. */
@@ -162,10 +168,11 @@ function progreso(tema, partidos) {
 
 function prepararMarco({ meta, partidos, temas }, temaActual) {
   if (DEMO) {
-    document.body.prepend(el('div', { clase: 'banda-demo', role: 'note' },
+    document.querySelector('.saltar')?.after(el('section', { clase: 'banda-demo', 'aria-label': 'Aviso de demostración' },
       'Demostración con partidos y datos ficticios · ',
       el('a', { href: location.pathname }, 'Ver datos reales')));
   }
+  regionAvisos();
   document.querySelectorAll('a[data-interno]').forEach((a) => { a.href = enlace(a.getAttribute('href')); });
 
   const pie = document.getElementById('actualizado');
@@ -174,7 +181,7 @@ function prepararMarco({ meta, partidos, temas }, temaActual) {
   const listaTemas = () => el('ul', { clase: 'indice-temas' }, temas.map((t) => el('li', {},
     el('a', { href: enlace('tema.html', { id: t.id }), 'aria-current': t.id === temaActual ? 'page' : null },
       el('span', {}, t.titulo),
-      partidos.length ? el('span', { clase: 'cifra' }, `${progreso(t, partidos)}%`) : null))));
+      partidos.length ? el('span', { clase: 'cifra' }, `${progreso(t, partidos)}%`, el('span', { clase: 'oculto-visual' }, ' documentado')) : null))));
 
   document.getElementById('lateral-temas')?.replaceChildren(listaTemas());
   document.getElementById('dialogo-temas-lista')?.replaceChildren(listaTemas());
@@ -243,7 +250,7 @@ async function portada() {
           el('p', {}, t.descripcion),
           el('div', { clase: 'progreso', role: 'img', 'aria-label': `${pct}% documentado` }, el('span', { estilo: { width: `${pct}%` } })),
           el('div', { clase: 'progreso-texto' },
-            `${t.preguntas.length} preguntas · ${votaciones} ${votaciones === 1 ? 'votación' : 'votaciones'}`,
+            `${t.preguntas.length} ${t.preguntas.length === 1 ? 'pregunta' : 'preguntas'} · ${votaciones} ${votaciones === 1 ? 'votación' : 'votaciones'}`,
             partidos.length ? ` · ${pct}% documentado` : '')));
       })));
 
@@ -362,7 +369,7 @@ function seccionVotaciones(tema, partidos) {
           const cmp = compararDiceHace(postura, voto, r.si_equivale_a);
           celda.append(el('p', { clase: 'comparacion' },
             el('span', { clase: 'etiqueta' }, 'Ahora dice'), insignia(POSTURAS[postura]),
-            cmp ? el('span', { clase: `coincide ${cmp.clase}` }, `→ ${cmp.texto}`) : null));
+            cmp ? el('span', { clase: `coincide ${cmp.clase}` }, el('span', { 'aria-hidden': 'true' }, '→ '), cmp.texto) : null));
         }
         return celda;
       })),
@@ -385,7 +392,8 @@ function matrizResumen(tema, partidos) {
           partidos.map((p) => {
             const info = POSTURAS[q.posiciones?.[p.id]?.postura] ?? PENDIENTE;
             return el('td', { 'data-partido': p.id, title: `${p.siglas}: ${info.texto}` },
-              el('span', { clase: `insignia ${info.clase}`, 'aria-label': info.texto }, info.simbolo));
+              el('span', { clase: `insignia ${info.clase}` },
+                el('span', { 'aria-hidden': 'true' }, info.simbolo), el('span', { clase: 'oculto-visual' }, info.texto)));
           })))))));
 }
 
